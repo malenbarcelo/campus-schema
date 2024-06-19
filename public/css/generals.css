@@ -1,0 +1,106 @@
+:root{
+    --color1:#051435;
+    --color2:#192c57;
+    --color3:#e9eaec;
+    --color4:#0046FF;
+    --color5:#294887;
+    --color6:#dee7f9;
+    --color7:white;
+    --errorColor:rgb(203, 4, 4)
+}
+
+/*---------------------body---------------------*/
+body{
+    position: relative;
+}
+
+/*---------------------display---------------------*/
+.notVisible{
+    display: none !important;
+}
+
+/*---------------------loader---------------------*/
+.loader {
+    border: 10px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 10px solid var(--color1);
+    width: 40px;
+    height: 40px;
+    animation: spin 3s linear infinite;
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 55%;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/*-----------------------------general actions-----------------------------*/
+.divGeneralActions{
+    display: flex;
+    column-gap: 15px;
+    position: absolute;
+    right: 80px;
+    top: 85px;
+}
+
+.divGeneralAction{
+    border: var(--color1) dashed 3px;
+    font-size: 20px;
+    height: 40px;
+    width: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.divGeneralAction:hover{
+    color:var(--color7);
+    background-color: var(--color1);
+}
+
+.divGeneralAction:hover .showActionPopup{
+    display: block;
+}
+
+/*---------------------paddings---------------------*/
+.pts{
+    padding-top: 10px;
+}
+
+.pbs{
+    padding-bottom: 50px;
+}
+
+/*---------------------margin---------------------*/
+.mtl{
+    margin-top: 40px;
+}
+.mtm{
+    margin-top: 30px;
+}
+
+.mts{
+    margin-top: 15px;
+}
+
+.mbs{
+    margin-bottom: 15px;
+}
+
+.mbm{
+    margin-bottom: 25px;
+}
+
+/*---------------------font---------------------*/
+.fwb{
+    font-weight: bold;
+}
+.fcg{
+    color: grey;
+}

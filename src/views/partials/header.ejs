@@ -1,0 +1,54 @@
+<div class="sideNav">
+    
+        <div class="divSideNavImg">
+            <img src="/images/companyLogo.jpg" alt="Company Logo" class="companyLogo">
+        </div>
+        <div class="divSideNav">
+            <div class="divMenu">
+                <% if (locals.isLogged && (userLogged.id_user_categories == 1 || userLogged.id_user_categories == 2)) { %>
+                    <div class = "a1SideNavBar">ADMINISTRACIÓN</div>
+                <% } %>
+                <% if (locals.isLogged && userLogged.id_user_categories == 1) { %>
+                    <!---<a class = "a2SideNavBar" href="/companies/view-companies">Instituciones</a>--->
+                    <a class = "a2SideNavBar" href="/users/create-company">Crear institución</a>
+                    <a class = "a2SideNavBar" href="/simulators/create">Crear simulador</a>
+                    <a class = "a2SideNavBar" href="/simulators/create-exercise">Crear ejercicio</a>
+                    <a class = "a2SideNavBar" href="/tokens/generate">Generar tokens</a>
+                <% } %>
+                <% if (locals.isLogged && (userLogged.id_user_categories == 1 ||userLogged.id_user_categories == 2 )) { %>
+                    <a class = "a2SideNavBar" href="/tokens/assignation">Asignar tokens</a>
+                <% } %>
+            </div>
+            <div class="divMenu">
+                <% if (locals.isLogged ) { %>
+                <div class = "a1SideNavBar">CURSOS</div>
+                <% } %>
+                <% if (locals.isLogged && (userLogged.id_user_categories == 1 ||userLogged.id_user_categories == 2 ) ) { %>
+                    <a class = "a2SideNavBar" href="/courses/create-course">Crear curso</a>
+                    <a class = "a2SideNavBar" href="/courses/create-commission">Crear comisión</a>
+                    <a class = "a2SideNavBar" href="/courses/students-assignation">Asignar alumnos</a>
+                <% } %>
+                <% if (locals.isLogged && (userLogged.id_user_categories != 1) ) { %>
+                    <a class = "a2SideNavBar" href="/courses/my-courses">Mis Cursos</a>
+                <% } %>
+            </div>
+            <div class="divMenu">
+                <% if (locals.isLogged && (userLogged.id_user_categories == 1)) { %>
+                    <div class = "a1SideNavBar">DATOS</div>
+                <% } %>
+                <% if (locals.isLogged && userLogged.id_user_categories == 1) { %>
+                    <a class = "a2SideNavBar" href="/courses/courses-data">Cursos</a>
+                    <a class = "a2SideNavBar" href="/simulators/simulators-data">Simuladores</a>
+                    <a class = "a2SideNavBar" href="/simulators/exercises-data">Ejercicios</a>
+                <% } %>
+            </div>
+            <div class="divMenu">
+                <% if (locals.isLogged && (userLogged.id_user_categories == 1 || userLogged.id_user_categories == 2)) { %>
+                    <a class = "a1SideNavBar" href="/users">USUARIOS</a>
+                <% } %>
+            </div>
+        </div>
+        
+</div>
+
+

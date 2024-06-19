@@ -1,0 +1,62 @@
+<%- include('../partials/head') %>
+<%- include('../partials/header') %>
+<%- include('../partials/userLogged') %>
+
+
+<div class="div22">
+    <h1 class="title1"><%= course.course_commission_course.course_name %></h1>
+    <h1 class="title2 title3">Comisión <%= course.commission %></h1>
+    <div class="div12" id="commissionId"><%= course.id %></div>
+
+    <% for( let i = 0; i < data.length; i++ ) { %>
+        <div class="div23"><h1 class="title2 title6"><%= data[i].simulator_name %></h1></div>
+        <% for( let j = 0; j < data[i].simulator_exercises.length; j++ ) { %>
+            <h2 class="title2"><%= data[i].simulator_exercises[j].exercise_name %></h2>
+            <div class="divFlex8">
+                <table>
+                    <tr>
+                        <th class="tableTitle1" >Fecha</th>
+                        <th class="tableTitle1" >Nota</th>
+                        <th class="tableTitle1" >Tiempo</th>
+                        <% data[i].simulator_exercises[j].exercise_steps.forEach(step => { %>
+                            <th class="tableTitle1" ><%= step.code %></th>
+                        <% }) %>
+                    </tr>
+    
+                    <% for( let k = 0; k < data[i].simulator_exercises[j].student_results.length; k++ ) { %>
+                        <tr>
+                            <td class="td1 td2"><%= data[i].simulator_exercises[j].student_results[k].date %></td>
+                            <td class="td1 td2"><%= data[i].simulator_exercises[j].student_results[k].grade %></td>
+                            <td class="td1 td2"><%= data[i].simulator_exercises[j].student_results[k].duration_secs %></td>
+                            <% data[i].simulator_exercises[j].student_results[k].steps_results.forEach(step => { %>
+                                <td class="td1 td2">
+                                    <% if (step.type == 'Paso realizado correctamente') { %>
+                                        <i class="fa-solid fa-check stepPassed"></i>
+                                    <% } %>
+                                    <% if (step.type == 'Error') { %>
+                                        <i class="fa-solid fa-xmark stepNotPassed" id=<%= 'obs_' + step.id %>></i>
+                                    <% } %>
+                                    <% if (step.type == '-') { %>
+                                        <i class="fa-solid fa-minus stepNotDone"></i>
+                                    <% } %>
+                                </td>
+                            <% }) %>
+                        </tr>
+                    <% } %>
+                </table>
+                <div class="div8">
+                    <h1 class="title5">Pasos del ejercicio: </h1>
+                    <% data[i].simulator_exercises[j].exercise_steps.forEach(step => { %>
+                        <p class="p5"><%= step.code + ': ' + step.description %></p>
+                    <% }) %>
+                </div>
+                <div class="div20" id="divStepComments"></div>
+            </div>
+        <% } %>
+    <% } %>
+</div>
+
+
+
+<script type="module" src="/js/studentCommissions.js"></script>
+

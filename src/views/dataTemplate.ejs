@@ -1,0 +1,17 @@
+<%- include('./partials/head') %>
+
+<body>
+    <%- include('./partials/header') %>
+    <%- include('./partials/userLogged') %> 
+
+    <div class="divBody">
+        
+        <div class="templateTitle">
+            <%= templateTitle %>
+        </div>
+
+        <%- include('./tables/' + dinamicView) %>
+
+    </div>
+    
+</body>

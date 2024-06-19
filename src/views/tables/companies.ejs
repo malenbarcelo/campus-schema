@@ -1,0 +1,69 @@
+<table>
+
+    <thead>
+        <tr>
+            <th rowspan="2" class="thTitle1">Institución</th>
+            <th rowspan="2" class="thTitle1">Administrador</th>
+            <th rowspan="2" class="thTitle1">Email</th>
+            <th colspan="2" class="thTitle1">Usuarios</th>
+            <th colspan="3" class="thTitle1 iTableTitle1">Tokens</th>
+            <th rowspan="2" class="thTitle1"><i class="fa-regular fa-trash-can"></i></th>
+        </tr>
+        <tr>
+            <th class="thTitle1"><i class="fa-regular fa-eye"></i></th>
+            <th class="thTitle1"><i class="fa-solid fa-user-plus"></i></th>
+            <th class="thTitle1">Libres</i></th>
+            <th class="thTitle1"><i class="fa-solid fa-plus"></i></th>
+            <th class="thTitle1"><i class="fa-solid fa-user-pen"></i></i></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <% companies.forEach(company => { %>
+            <tr>
+                <th class="th1">
+                    <%= company.company_name %>
+                </th>
+                <th class="th1">
+                    administrador
+                </th>
+                <th class="th1">
+                    email
+                </th>
+                <th class="th1">
+                    <i class="fa-regular fa-eye iTable1"></i>
+                </th>
+                <th class="th1">
+                    <i class="fa-solid fa-user-plus iTable1"></i>
+                </th>
+                <th class="th1">
+                    <%= company.tokensToAssign %>
+                </th>
+                <th class="th1">
+                    <i class="fa-solid fa-plus iTable1">
+                </th>
+                <th class="th1">
+                    <i class="fa-solid fa-user-pen iTable1">
+                </th>
+                <th class="th1">
+                    <i class="fa-regular fa-trash-can iTable1"></i>
+                </th>
+            </tr>
+        <% }) %>  
+    </tbody>
+
+</table>
+
+
+
+
+
+
+    
+
+
+    
+
+
+
+

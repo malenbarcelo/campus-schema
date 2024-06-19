@@ -1,0 +1,91 @@
+<%- include('../partials/head') %>
+<%- include('../partials/header') %>
+<%- include('../partials/userLogged') %>
+
+<% if (locals.successMessage1) { %>
+    <script>
+        alertify.success('Tokens asignados con éxito');
+    </script>
+<% } %>
+
+<div class="mainTitle">ASIGNAR TOKENS</div>
+
+<div class="mainContent">
+    <form action="/tokens/assignation" enctype="multipart/form-data" method="POST" name="formAssignTokens" class="form1">
+        <% if (userLogged.id_user_categories == 1) { %>
+            <div class="divSelectCompany">
+                <select name="selectCompany" id = "selectCompany" class="input1 select1 <%= locals.errors && errors.selectCompany ? 'isInvalid' : null %>">
+                    <option value="default" selected>--Seleccione una institución--</option>
+                    <% companies.forEach(company => { %>
+                        <% if (company.company_name != 'Schema') { %>
+                            <option value="<%= company.company_name %>" <%= locals.oldData && oldData.selectCompany == company.company_name ? 'selected' : null %>><%= company.company_name %></option>
+                        <% } %>
+                    <% }) %>
+                </select>
+                <div class="divError1">
+                    <% if (locals.errors && errors.selectCompany) { %>
+                        <%= errors.selectCompany.msg %>
+                    <% } %>
+                </div>
+            </div>
+        <% } %>
+
+        <div class="div5">
+            <% if (userLogged.id_user_categories != 1 || (locals.oldData && oldData.selectCompany != 'default')) { %>
+                <% if ((notAssignedAdm.length + notAssignedTeacher.length + notAssignedStudent.length) !=0 ) { %>
+                    <div class="div4" id="tokensToAssignText2"><i class="fa-solid fa-triangle-exclamation"></i> Tiene para asignar un total de <%= notAssignedAdm.length + notAssignedTeacher.length + notAssignedStudent.length%> licencias a distribuir de la siguiente manera:</div>
+
+                    <div class="divFlex6" id="admTokensToAssignText2">
+                        <div>Licencias de Administrador: </div><div><%= notAssignedAdm.length %></div>
+                    </div>
+                    <div class="divFlex6" id="teacherTokensToAssignText2">
+                        <div>Licencias de Profesor: </div><div><%= notAssignedTeacher.length %></div>
+                    </div>
+                    <div class="divFlex6" id="studentTokensToAssignText2">
+                        <div>Licencias de Alumno: </div><div><%= notAssignedStudent.length %></div>
+                    </div>
+                <% } %>
+                <% if ((notAssignedAdm.length + notAssignedTeacher.length + notAssignedStudent.length) == 0 ) { %>
+                    <div class="p2" id="noTokensToAssignText2"><i class="fa-solid fa-triangle-exclamation"></i> No posee licencias pendientes de asignación.</div>
+                <% } %>
+            <% } %>
+            <% if (userLogged.id_user_categories == 1) { %>
+                <div class="div4" id="tokensToAssignText"></div>
+                <div class="divFlex6 divFlex6Display" id="admTokensToAssignText"></div>
+                <div class="divFlex6 divFlex6Display" id="teacherTokensToAssignText"></div>
+                <div class="divFlex6 divFlex6Display" id="studentTokensToAssignText"></div>
+                <div class="p2 divFlex6Display" id="noTokensToAssignText"></div>
+            <% } %>
+        </div>
+
+        <div class="div6">
+            <div class="divFlex7 <%= locals.errors && errors.fileAssignTokens ? 'isInvalid' : null %>">
+                <i class="fa-solid fa-file-excel"></i>
+                <input type="file" name="fileAssignTokens" class="input4">
+            </div>
+            <div class="divError1">
+                <% if (locals.errors && errors.fileAssignTokens) { %>
+                    <%= errors.fileAssignTokens.msg %> 
+                <% } %>
+            </div>
+            <div class="div7">
+                <p class="p3"><i class="fa-solid fa-circle-info"></i> Para asignar tokens suba un archivo en formato .xls, xlsx ó xlsm. <br> El mismo debe contar con cinco columnas, sin títulos, según el siguiente ejemplo*:</p>
+                <img src="/images/xlsExample2.jpg" alt="Ejemplo .xls asignar alumnos" class="xlsExample2">
+                <p class="p3">*No se admiten campos vacíos.</p>
+            </div> 
+
+        </div>
+        <div class="divButtons1">
+            <input type="submit" value="Asignar" class="button1">
+            <!---<input type="button" value="Cancelar" onclick="window.location.href='/users/profile'" class="button1">--->
+        </div>
+    </form>
+</div>
+
+<script type="module" src="/js/assignTokens.js"></script>
+    
+    
+
+
+
+

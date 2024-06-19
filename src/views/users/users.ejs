@@ -1,0 +1,155 @@
+<%- include('../partials/head') %>
+<%- include('../partials/header') %>
+<%- include('../partials/userLogged') %>
+
+<div id="userLoggedCategory" class="notVisible"><%= userLogged.id_user_categories %></div>
+
+<!---------GENERAL ACTIONS--------->
+<div class="divGeneralActions">
+    <div class="divGeneralAction notVisible" id="DGAassignCommissions">
+        <i class="fa-solid fa-user-pen"></i>
+        <div class="showActionPopup">
+            Asignar comisión
+        </div>
+    </div>
+
+    <div class="divGeneralAction notVisible" id="DGArestorePasswords">
+        <i class="fa-solid fa-unlock-keyhole"></i>
+        <div class="showActionPopup">
+            Restablecer contraseñas
+        </div>
+    </div>
+
+    <div class="divGeneralAction notVisible" id="DGAblockUsers">
+        <i class="fa-solid fa-user-xmark"></i>
+        <div class="showActionPopup">
+            Baja Usuarios
+        </div>
+    </div>
+
+    <div class="divGeneralAction" id="DGAcreateUsers">
+        <i class="fa-solid fa-user-plus"></i>
+        <div class="showActionPopup">
+            Crear usuario/s
+        </div>
+    </div>
+</div>
+
+<!---------------CONTENT--------------->
+<div class="mainTitle">USUARIOS</div>
+
+<div class="mainContent">
+    <div class="subtitle">
+        <!---select company--->
+        <% if (locals.isLogged && userLogged.id_user_categories == 1) { %>
+            <div class="divInputsRow mtm mbm">
+                <select name="selectCompany" id="selectCompany" class="input1 iL">
+                    <option value="default" selected>Todas las instituciones</option>
+                    <% companies.forEach(company => { %>
+                        <option value="<%= company.id %>">
+                            <%= company.company_name %>
+                        </option>
+                    <% }) %>
+                </select>
+            </div>
+        <% } %>
+        <% if (locals.isLogged && userLogged.id_user_categories == 2) { %>
+            <div class="divInputsRow" id="companyName">
+                <%= userLogged.user_company.company_name %>
+            </div>
+        <% } %>
+    </div>
+
+    <div class="filters">
+        <!--------FILTERS-------->
+        <div class="divInputsRow">
+            
+            <div class="divInput">
+                <label class="label1">Apellido y nombre</label>
+                <select id="filterName" class="input2 iM">
+                    <option value="default"></option>
+                    <% users.forEach(user => { %>
+                        <option value="<%= user.id %>">
+                            <%= user.last_name + ', ' + user.first_name %>
+                        </option>
+                    <% }) %>                    
+                </select>
+            </div>
+
+            <div class="divInput">
+                <label class="label1">Email</label>
+                <input type="text" id="filterEmail" class="input2 iS" autocomplete="off">                
+            </div>
+
+            <div class="divInput">
+                <label class="label1">DNI</label>
+                <input type="text" id="filterDni" class="input2 iXS" autocomplete="off">                
+            </div>
+
+            <div class="divInput">
+                <label class="label1">Perfil</label>
+                <select id="filterCategory" class="input2 iS">
+                    <option value="default"></option>
+                    <% usersCategories.forEach(category=> { %>
+                        <option value="<%= category.id %>">
+                            <%= category.category_name %>
+                        </option>
+                    <% }) %>                
+                </select>
+            </div>
+
+            <div class="divInput">
+                <label class="label1">Alta</label>
+                <input type="date" id="filterDate" class="input2 iXS">                
+            </div>
+
+            <div class="unfilterIcon" id="unfilterUsers">
+                <i class="fa-solid fa-filter-circle-xmark"></i>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="content1 pts">        
+        
+        <div class="divTables" id="divTables">
+
+            <div class="thIconInfo" id="thIcon1Info">Ver y editar datos personales</div>
+            <div class="thIconInfo" id="thIcon2Info">Restablecer contraseña</div>
+            <div class="thIconInfo" id="thIcon3Info">Baja usuario</div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th class="theadCss thL thLeftBorder thTall">Apellido y nombre</th>
+                        <th class="theadCss thM wXS thTall">DNI</th>
+                        <th class="theadCss thM thTall">Email</th>
+                        <th class="theadCss thM thTall">Perfil</th>
+                        <th class="theadCss thM thTall">Alta</th>
+                        <th class="theadCss thS thTall">
+                            <i class="fa-solid fa-user-pen thIcon" id="thIcon1"></i>
+                        </th>
+                        <th class="theadCss thS thTall">
+                            <i class="fa-solid fa-unlock-keyhole thIcon" id="thIcon2"></i>
+                        </th>
+                        <th class="theadCss thS thTall thIcon">
+                            <i class="fa-solid fa-user-xmark" id="thIcon3"></i>
+                        </th>
+                        <th class="theadCss thS thTall thRightBorder thIcon">
+                            <input type="checkbox" id="selectAll">
+                        </th>
+                    </tr>
+                </thead>
+                <tbody id="bodyUsers"></tbody>                
+            </table>            
+        </div>
+    </div>
+
+</div>
+
+<!----------LOADER---------->
+<div id="loader" class="loader"></div>
+
+
+<%- include('./usersPopups') %>
+<script type="module" src="/js/users.js"></script>

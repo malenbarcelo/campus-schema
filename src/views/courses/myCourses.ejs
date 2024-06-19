@@ -1,0 +1,37 @@
+<%- include('../partials/head') %>
+<%- include('../partials/header') %>
+<%- include('../partials/userLogged') %>
+
+<div class="mainTitle">MIS CURSOS</div>
+
+<div class="mainContent mtl">
+
+    <% courses.forEach(course => { %>
+
+        <div class="divFlex4" id="<%= course.id_courses %>">
+            <%= course.course_name %>
+            <i class="fa-solid fa-plus plus1" id="<%= 'plusMyCourses' + course.id_courses %>"></i>
+            <i class="fa-solid fa-minus minus1" id="<%= 'minusMyCourses' + course.id_courses %>"></i>
+        </div>
+
+        <div class="div1" id="<%= 'commissionsCourse' + course.id_courses %>">
+                <% commissions.forEach(commission => { %>
+                    <% if (commission.commission_data.id_courses == course.id_courses) { %>
+
+                        <div class="div2">
+                            <a href=<%= userLogged.id_user_categories != 4 ? '/courses/commissions/' + commission.commission_data.id : '/courses/commissions/' + commission.commission_data.id + '/' + userLogged.id %>>
+                                Comisión: <%= commission.commission_data.commission %> [Inicio <%= commission.commission_data.start_date %> -  Fin <%= commission.commission_data.end_date %>]
+                            </a>
+
+                            <% if (date <= new Date(commission.commission_data.end_date + "T00:00:00") || ((date.getDate() == (new Date(commission.commission_data.end_date + "T00:00:00")).getDate()) && (date.getMonth() == (new Date(commission.commission_data.end_date + "T00:00:00")).getMonth()) && (date.getFullYear() == (new Date(commission.commission_data.end_date + "T00:00:00")).getFullYear()))) { %>
+                                <div class="div3">En curso</div>
+                            <% } %>
+                        </div>
+                    <% } %>
+                <% }) %>
+        </div>
+    <% }) %>
+
+</div>
+
+<script type="module" src="/js/myCourses.js"></script>

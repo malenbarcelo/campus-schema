@@ -1,0 +1,52 @@
+<%- include('../partials/head') %>
+<%- include('../partials/header') %>
+<%- include('../partials/userLogged') %>
+
+<div class="divForm">
+    <h3 class="title1">Crear una institución</h3>
+
+<form action="/users/create-company" method="POST" name="formCreateCompany" class="form1">    
+    <div>
+        <input type="text" name="company" placeholder="Institución" class="input1 <%= locals.errors && errors.company ? 'isInvalid' : null %>" value="<%= locals.oldData ? oldData.company : null %>">
+        <div class="divError1">
+            <% if (locals.errors && errors.company) { %>
+                <%= errors.company.msg %>
+            <% } %>
+        </div>
+    </div>
+    <div>
+        <input type="text" name="firstName" placeholder="Nombre del administrador" class="input1 <%= locals.errors && errors.firstName ? 'isInvalid' : null %>" value="<%= locals.oldData ? oldData.firstName : null %>">
+        <div class="divError1">
+            <% if (locals.errors && errors.firstName) { %>
+                <%= errors.firstName.msg %>
+            <% } %>
+        </div>
+    </div>
+    <div>
+        <input type="text" name="lastName" placeholder="Apellido del administrador" class="input1 <%= locals.errors && errors.lastName ? 'isInvalid' : null %>" value="<%= locals.oldData ? oldData.lastName : null %>">
+        <div class="divError1">
+            <% if (locals.errors && errors.lastName) { %>
+                <%= errors.lastName.msg %>
+            <% } %>
+        </div>
+    </div>
+    <div>
+        <input type="text" name="email" placeholder="Email del administrador" class="input1 <%= locals.errors && errors.email ? 'isInvalid' : null %>" value="<%= locals.oldData ? oldData.email : null %>">
+        <div class="divError1">
+            <% if (locals.errors && errors.email) { %>
+                <%= errors.email.msg %>
+            <% } %>
+        </div>
+    </div>
+    
+    <div>
+        <button type="submit" class="button1">Crear</button>
+        <!---<button type="reset" class="button1">Cancelar</button>--->
+    </div>
+
+</form>
+
+
+</div>
+
+

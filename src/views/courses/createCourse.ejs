@@ -1,0 +1,80 @@
+<%- include('../partials/head') %>
+<%- include('../partials/header') %>
+<%- include('../partials/userLogged') %>
+
+<% if (locals.successMessage1) { %>
+    <script>
+        alertify.success('Curso creado con éxito');
+    </script>
+<% } %>
+
+<div class="mainTitle">CREAR CURSO</div>
+
+<div class="mainContent">
+    
+    <form action="/courses/create-course" method="POST" name="formCreateCourse" class="form1">
+        
+        <div class="divInputsColumn mtm">
+            <% if (user.id_user_categories == 1) { %>
+                <div class="divSelectCompany">
+                    <select name="selectCompany" class="input1 select1 <%= locals.errors && errors.selectCompany ? 'isInvalid' : null %>">
+                        <option value="default" selected>--Seleccione una institución--</option>
+                        <% companies.forEach(company => { %>
+                            <% if (company.company_name != 'Schema') { %>
+                                <option value="<%= company.company_name %>" <%= locals.oldData && oldData.selectCompany == company.company_name ? 'selected' : null %>><%= company.company_name %></option>
+                            <% } %>
+                            
+                        <% }) %>
+                    </select>
+                    <div class="divError1">
+                        <% if (locals.errors && errors.selectCompany) { %>
+                            <%= errors.selectCompany.msg %>
+                        <% } %>
+                    </div>
+                </div>
+            <% } %>
+    
+            <div class="divInput">
+                <label for="courseName" class="label1 fwb">Nombre del curso</label>
+                <input type="text" name="courseName" class="input2 iXL <%= locals.errors && errors.courseName ? 'isInvalid' : null %>" value="<%= locals.oldData ? oldData.courseName : null %>">
+                <div class="divError1">
+                    <% if (locals.errors && errors.courseName) { %>
+                        <%= errors.courseName.msg %>
+                    <% } %>
+                </div>
+            </div>
+            <div class="divInput">
+                <label for="courseDescription" class="label1 fwb">Descripción</label>
+                <input type="text" name="courseDescription"class="input2 iXL" value="<%= locals.oldData ? oldData.courseDescription : null %>">
+                <div class="divError1"></div>
+            </div>
+    
+            <div>
+                <h1 class="title2">Simuladores asociados al curso</h1>
+                <div class="divError1">
+                    <% if (locals.errors && errors.simulators) { %>
+                        <%= errors.simulators.msg %>
+                    <% } %>
+                </div>
+                <% simulators.forEach(simulator => { %>
+                        <div class="divFlex2">
+                            <input type="checkbox" name="<%= simulator.dataValues.id%>" value="<%= simulator.dataValues.simulator_name%>">
+                            <label for="<%= simulator.dataValues.id%>" value="<%= simulator.dataValues.simulator_name%>" class="label2"><%= simulator.dataValues.simulator_name%></label>
+                        </div>
+                    <% }) %>
+            </div>
+
+        </div>
+        
+        <div class="divButtonsRow mtl">
+            <input type="submit" value="Crear" class="button1 bm">
+        </div>
+    </form>
+</div>
+
+
+        
+    
+        
+
+

@@ -1,0 +1,24 @@
+<%- include('../partials/head') %>
+<%- include('../partials/header') %>
+<%- include('../partials/userLogged') %>
+
+<div class="divForm">
+    <h1 class="title1">Cursos</h1>
+    <table class="table1">
+        <tr>
+          <th class="tableTitle1">Curso</th>
+          <th class="tableTitle1">Descripción</th>
+          <th class="tableTitle1">Institución</th>
+          <th class="tableTitle1">Id</th>
+        </tr>
+        <% courses.forEach(course => { %>
+            <tr>
+                <td class="td1 td2"><%= course.course_name %></td>
+                <td class="td1 td2 td3"><%= course.course_description %></td>
+                <td class="td1 td2"><%= course.course_company.company_name %></td>
+                <td class="td1 td2"><%= course.id %></td>
+            <tr>
+        <% }) %>
+    </table>
+</div>
+

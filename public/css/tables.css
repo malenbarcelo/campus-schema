@@ -1,0 +1,117 @@
+/*---------------------tables---------------------*/
+table{
+    margin: auto;
+    border-collapse: collapse;
+}
+
+thead{
+    position: sticky;
+    top:0;
+}/*to leave titles fixed*/ 
+
+.divTables{
+    height: 60vh;
+    overflow-y: auto;
+    width: fit-content;
+    margin: auto;
+}
+
+.divTables2{
+    max-height: 30vh;
+    overflow-y: auto;
+    width: fit-content;
+    margin: auto;
+    margin-bottom: 20px;
+}
+
+.theadCss{
+    font-size: 13px;
+    text-align: center;
+    background-color: var(--color1);
+    color: var(--color3);
+    padding: 4px;
+    font-weight: lighter;
+    position: relative;
+    overflow: visible;
+    z-index: 1;
+}
+
+.thLeftBorder{
+    border-top-left-radius: 15px;
+}/*Add radius to left top border*/
+
+.thRightBorder{
+border-top-right-radius: 15px;
+}/*Add radius to right top border*/
+
+.thTall{
+    height: 25px;
+}
+
+.divThWithIcon{
+    display: flex;
+    column-gap: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+/*-----th actions data----*/
+.thIcon{
+    cursor: pointer;
+}
+
+.thIconInfo{
+    font-size: 12px;
+    display: none;
+    position: absolute;
+    top: -10px;
+    right:0px;
+    width: 200px;
+    text-align: center;
+}
+
+
+/*-----th with-----*/
+.thS{
+    width: 40px;
+}
+
+.thM{
+    width: 150px;
+}
+
+.thL{
+    width: 250px;
+}
+
+.thXL{
+    width: 450px;
+}
+
+.thXXL{
+    width: 650px;
+}
+
+/*------Tbody------*/
+.tBody1{
+    font-weight: lighter;
+    padding: 9px 0px;
+    font-size: 13px;
+}
+
+.tBodyEven{
+    background-color: white;
+}/*background when row number is even*/
+
+.tBodyOdd{
+    background-color: var(--color3);
+}/*background when row number is odd*/
+
+.bodyIcon{
+    cursor: pointer;
+}
+
+.bodyIcon:hover{
+    color: rgb(90, 89, 89);
+}
+

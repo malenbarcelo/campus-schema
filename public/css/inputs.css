@@ -1,0 +1,99 @@
+/*----------GENERAL----------*/
+input, select, textarea{
+    outline:none
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}/*Hide arrows from input type number*/
+
+input[type="checkbox"]:checked {
+    accent-color: black
+}
+
+input[type="radio"]:checked {
+accent-color: black
+}
+
+/*----------DIV INPUTS----------*/
+.divInputsRow{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 10px;
+    position: relative;
+}
+
+.divInputsColumn{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/*----------INPUTS ADN LABELS----------*/
+.divInput{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+.input1  { /*without label*/ 
+    background-color:var(--color3);
+    border-radius:0px;
+    border: none;    
+    font-family: 'IBM Plex Sans';
+    padding: 7px 0px;
+    text-align: center;
+    font-size: 13px;
+}
+
+.input2{ /*with label*/
+    text-align: center;
+    border:black solid 1px;
+    background-color: var(--color7);
+    border-radius: 4px;
+    font-size: 13px;
+    padding: 9px 0px 4px 0px;
+}
+
+.label1{
+    position: absolute;
+    font-size: 13px;
+    left: 8px;
+    top: -8px;
+    padding: 0px 5px;
+    background-color: var(--color7);
+}
+
+
+/*----------INPUTS WIDTH----------*/
+.iXS{
+    width:120px;
+}
+
+.iS{
+    width:200px;
+}
+
+.iM{
+    width:250px;
+}
+
+.iL{
+    width:300px;
+}
+
+.iXL{
+    width:350px;
+    padding: 10px 5px;
+}
+
+/*----------FILTERS ICONS---------*/
+.unfilterIcon{
+    cursor: pointer;
+}

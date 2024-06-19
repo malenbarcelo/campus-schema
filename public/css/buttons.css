@@ -1,0 +1,33 @@
+/*---------------------Buttons---------------------*/
+.divButtonsRow{
+    display: flex;
+    column-gap: 9px;
+    justify-content: center;
+}
+
+.button1{
+    background-color: var(--color1);
+    text-align: center;
+    cursor: pointer;
+    border: none;
+    font-size: 13px;
+    color: var(--color3);
+    border: var(--color1) solid 2px;
+    
+}
+
+.button1:hover{
+    background-color: var(--color7);
+    color: var(--color1);
+    font-weight: bold;
+}
+
+.bs{
+    width: 70px;
+    padding: 3px 0px;
+}
+
+.bm{
+    width: 100px;
+    padding: 5px 0px;
+}

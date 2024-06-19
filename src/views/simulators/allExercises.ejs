@@ -1,0 +1,35 @@
+<%- include('../partials/head') %>
+<%- include('../partials/header') %>
+<%- include('../partials/userLogged') %>
+
+<div class="divForm">
+    <h1 class="title1">Ejercicios</h1>
+    <table class="table1">
+        <tr>
+          <th class="tableTitle1">Ejercicio</th>
+          <th class="tableTitle1">Descripción</th>
+          <th class="tableTitle1">Simulador</th>
+          <th class="tableTitle1">Id</th>
+        </tr>
+        <% exercises.forEach(exercise => { %>
+            <tr>
+                <td class="td1 td2"><%= exercise.exercise_name %></td>
+                <td class="td1 td2 td3"><%= exercise.exercise_description %></td>
+                <td class="td1 td2 td3"><%= exercise.exercise_simulator.simulator_name %></td>
+                <td class="td1 td2"><%= exercise.id %></td>
+            <tr>
+        <% }) %>
+    </table>
+</div>
+
+
+
+
+    
+
+
+    
+
+
+
+

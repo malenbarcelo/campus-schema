@@ -1,0 +1,195 @@
+/*-----login.ejs-----*/
+.mainTitleLogin{
+    height: 20vh;
+    width: calc(100vw - 230px);
+    margin-left: 230px;
+    display: flex;
+    align-items: end;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: bold;
+}
+.mainContentLogin{
+    height: 80vh;
+    width: calc(100vw - 230px);
+    margin-left: 230px;
+    overflow: auto;
+}
+.divInputsLogin{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5%;
+}
+.divInputLogin{
+    text-align: center;
+    width: 600px;
+}
+.inputLogin{
+    background-color:var(--color3);
+    border-radius:0px;
+    border: none;
+    border-bottom: black solid 1px;
+    font-family: 'IBM Plex Sans';
+    padding: 9px 0px;
+    text-align: center;
+    font-size: 14px;
+    width: 300px;
+}
+
+.errorLogin{    
+    font-size: 12px;
+    color: var(--errorColor);
+    margin: auto;
+    margin-bottom: 15px;
+    margin-top:3px;
+    width:300px;
+}
+
+.buttonLogin{
+    background-color: var(--color1);
+    text-align: center;
+    cursor: pointer;
+    border: none;
+    font-size: 13px;
+    color: var(--color3);
+    border: var(--color1) solid 2px;
+    padding: 4px 12px;
+    margin-top: 45px;
+}
+
+/*-----usersPopups.ejs-----*/
+#acceptCancelContent{
+    margin: 10% 47%;
+}
+
+#userToBlock, #userToRestore{
+    margin-top: 10px;
+}
+
+#selectCommissionError,#editUserDataError{    
+    font-size: 12px;
+    color: var(--errorColor);
+    margin: auto;
+    text-align: center;
+    font-weight: bold;
+    width: 100%;
+    display: none;
+    flex-direction: row;
+    column-gap: 7px;
+    justify-content: center;
+    align-items: center;
+}
+
+#errorIcon{
+    color: var(--errorColor);
+}
+
+#editPopupContent{
+    margin: 3% 29%;
+    max-width: 800px !important;
+    width: 800px !important;
+}
+
+.DGAs1{
+    display: flex;
+    column-gap: 15px;
+    position: absolute;
+    right: 25px;
+    top: 15px;
+}
+
+.DGA1{
+    border: var(--color1) dashed 3px;
+    font-size: 16px;
+    height: 25px;
+    width: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.DGA1:hover{
+    color:var(--color7);
+    background-color: var(--color1);
+}
+
+.DGA1:hover .DGA1showActionPopup{
+    display: block;
+}
+
+.DGA1showActionPopup{
+    display: none;
+    padding: 2px 5px;
+    position: absolute;
+    font-size: 12px;
+    border-radius: 3px;
+    color: var(--color1);
+    top:30px;
+    text-align: center;
+    width: 80px;
+}
+
+#noCommissions{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 10px;
+    font-size: 15px;
+    color: grey;
+    margin-bottom: 20px;
+}
+
+.iconDivAlertCommissions{
+    color: grey !important;
+    font-size: 20px !important;
+}
+
+#assignPopup{
+    z-index: 2;
+}
+
+/*-----create user popup-----*/
+
+#createUserIcon{
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    color: var(--color1);
+    border: var(--color1) solid 3px;
+    border-radius: 3px;
+    padding: 2px;
+}
+#createUserIcon:hover{
+    color: var(--color7);
+    background-color: var(--color1);
+}
+
+#createErrorIcon,#createErrorIcon2{
+    color: var(--errorColor);
+}
+#createUserData,#createCommissionData{
+    padding-bottom: 20px;
+}
+
+#DGAcreateUser{
+    right: 13px;
+    top: 10px;
+}
+
+.divCheckbox{
+    display: flex;
+    align-items: center;
+    position: absolute;
+    right: 1%;
+    padding: 7px 10px;
+    border-radius: 5px;
+    background-color: rgb(228, 225, 225);
+    font-size: 13px;
+
+
+}
+

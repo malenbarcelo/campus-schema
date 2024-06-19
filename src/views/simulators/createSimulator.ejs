@@ -1,0 +1,38 @@
+<%- include('../partials/head') %>
+<%- include('../partials/header') %>
+<%- include('../partials/userLogged') %>
+
+<div class="divForm">
+    <% if (locals.successMessage) { %>
+        <script>
+            alertify.success('Simulador creado con éxito');
+        </script>
+    <% } %>
+    
+    <h1 class="title1">Crear simulador</h1>
+    
+    <form action="/simulators/create" method="POST" name="formCreateSimulator" class="form1">
+        <div>
+            <input type="text" name="simulatorName" placeholder="Nombre del simulador" class="input1  <%= locals.errors && errors.simulatorName ? 'isInvalid' : null %>" value="<%= locals.oldData ? oldData.simulatorName : null %>">
+            <div class="divError1">
+                <% if (locals.errors && errors.simulatorName) { %>
+                    <%= errors.simulatorName.msg %>
+                <% } %>
+            </div>
+        </div>
+        <div>
+            <input type="text" name="simulatorDescription" placeholder="Descripción" class="input1 <%= locals.errors && errors.simulatorDescription ? 'isInvalid' : null %>" value="<%= locals.oldData ? oldData.simulatorDescription : null %>">
+            <div class="divError1"></div>
+        </div>
+        <div class="divButtons1">
+            <input type="submit" value="Crear" class="button1">
+            <!---<input type="button" value="Cancelar">--->
+        </div>
+    </form>
+    
+
+</div>
+
+
+<script type="module" src="/js/createSimulator.js"></script>
+

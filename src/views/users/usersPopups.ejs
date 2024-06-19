@@ -1,0 +1,337 @@
+
+<!----------POPUPS---------->
+<!---Block user (in users.js)--->
+<div class="acceptCancelPopup" id="blockPopup">
+    
+    <div class="acceptCancelContent" id="acceptCancelContent">
+        
+        <div class="acceptCancelClosePopup" id="blockPopupClose">X</div>
+        <div class="acceptCancelIcon"><i class="fa-solid fa-user-xmark"></i></div>
+
+        <div class="acceptCancelText">
+            <div id="blockUsersQuestion"></div>
+            <div id="userToBlock"></div>
+        </div>       
+        
+        <div class="divButtonsRow">
+            <div id="blockPopupAccept" class="button1 bs">Aceptar</div>
+            <div id="blockPopupCancel" class="button1 bs">Cancelar</div>
+        </div>
+    </div>
+</div>
+
+<div class="okPopup" id="okBlockPopup">
+    <div class="okContent">
+        <div class="okIcon"><i class="fa-regular fa-circle-check"></i></div>
+        <div class="okText">Usuario/s dado/s de baja con éxito</div>
+    </div>
+</div>
+
+<div class="okPopup" id="okBlockPopup">
+    <div class="okContent">
+        <div class="okIcon"><i class="fa-regular fa-circle-check"></i></div>
+        <div class="okText">Usuario/s dado/s de baja con éxito</div>
+    </div>
+</div>
+
+<!---Restore password--->
+<div class="acceptCancelPopup" id="restorePopup">
+        
+    <div class="acceptCancelContent">        
+        <div class="acceptCancelClosePopup" id="restorePopupClose">X</div>
+        <div class="acceptCancelIcon"><i class="fa-solid fa-unlock-keyhole"></i></div>
+        <div class="acceptCancelText">
+            <div id="restoreQuestion"></div>
+            <div id="userToRestore"></div>            
+        </div>
+        <div class="divButtonsRow">
+            <div id="restorePopupAccept" class="button1 bs">Aceptar</div>
+            <div id="restorePopupCancel" class="button1 bs">Cancelar</div>
+        </div>
+    </div>
+</div>
+
+<div class="okPopup" id="okRestorePopup">
+    <div class="okContent">
+        <div class="okIcon"><i class="fa-regular fa-circle-check"></i></div>
+        <div class="okText">Contraseña/s restablecida/s con éxito</div>
+    </div>
+</div>
+
+<!---Assign commissions--->
+<div class="acceptCancelPopup" id="assignPopup">
+
+    <div class="notVisible" id="assignFrom"></div>
+        
+    <div class="acceptCancelContent">        
+        <div class="acceptCancelClosePopup" id="assignPopupClose">X</div>
+        <div class="acceptCancelIcon"><i class="fa-solid fa-user-pen"></i></div>
+
+        <div class="acceptCancelInputs mtm">
+            <div class="acceptCancelTitle">Asignar comisión</div>
+            <div class="divInputsColumns">
+                <div class="divInput mbs">
+                    <label class="label1 fwb">Curso</label>
+                    <select id="selectCourseAssign" class="input2 iXL">
+                        <option value="default"></option>                                          
+                    </select>
+                </div>
+                <div class="divInput mbs">
+                    <label class="label1 fwb">Comisión</label>
+                    <select id="selectCommissionAssign" class="input2 iXL">
+                        <option value="default"></option>                                          
+                    </select>
+                </div>
+                <div id="selectCommissionError">
+                    <i class="fa-solid fa-triangle-exclamation" id="errorIcon"></i>
+                    <div id="selectCommissionErrorText"></div>
+                </div>
+            </div>
+        </div>
+        <div class="divButtonsRow">
+            <div id="assignPopupAccept" class="button1 bs">Asignar</div>
+            <div id="assignPopupCancel" class="button1 bs">Cancelar</div>
+        </div>
+    </div>
+</div>
+
+<div class="okPopup" id="okAssignPopup">
+    <div class="okContent">
+        <div class="okIcon"><i class="fa-regular fa-circle-check"></i></div>
+        <div class="okText">Comisión asignadas con éxito</div>
+    </div>
+</div>
+
+<!---View and edit users data--->
+<div class="acceptCancelPopup" id="editPopup">
+        
+    <div class="acceptCancelContent" id="editPopupContent">        
+        <div class="acceptCancelClosePopup" id="editPopupClose">X</div>
+        <div class="acceptCancelIcon"><i class="fa-solid fa-user-pen"></i></div>
+
+        <div class="acceptCancelInputs mtm">
+            <div class="DGAs1">
+                <div class="DGA1" id="DGAblockFromEdit">
+                    <i class="fa-solid fa-unlock-keyhole"></i>
+                    <div class="DGA1showActionPopup">
+                        Restablecer contraseña
+                    </div>
+                </div>
+            </div>
+            <div class="acceptCancelTitle">Datos personales</div>
+            <div class="divInputsColumn">
+                <div class="notVisible" id="userId"></div>                  
+                <div class="divInput mbs">
+                    <label class="label1 fwb">Apellido</label>
+                    <input type="text" class="input2 iL" id="userLastName">                    
+                </div>
+                <div class="divInput mbs">
+                    <label class="label1 fwb">Nombre</label>
+                    <input type="text" class="input2 iL" id="userFirstName">                    
+                </div>
+                <div class="divInput mbs">
+                    <label class="label1 fwb">Email</label>
+                    <input type="text" class="input2 iL fcg" id="userEmail" readonly>                    
+                </div>
+                <div class="divInput mbs">
+                    <label class="label1 fwb">DNI</label>
+                    <input type="text" class="input2 iL" id="userDNI">                    
+                </div>
+                <div class="divInput mbs">
+                    <label class="label1 fwb">Perfil</label>
+                    <input type="text" class="input2 iL fcg" id="userCategory" readonly>                    
+                </div>
+                <div id="editUserDataError">
+                    <i class="fa-solid fa-triangle-exclamation" id="errorIcon"></i>
+                    <div>Debe completar todos los datos</div>
+                </div>
+            </div>
+        </div>
+        <div class="acceptCancelInputs mts" id="userCommissions">
+            <div class="DGAs1" id="DGAassignCommission">
+                <div class="DGA1">
+                    <i class="fa-solid fa-plus"></i>
+                    <div class="DGA1showActionPopup">
+                        Asignar comisión
+                    </div>
+                </div>
+            </div>
+            <div class="acceptCancelTitle">Comisiones</div>
+            <div id="noCommissions">
+                <i class="fa-solid fa-circle-info iconDivAlertCommissions"></i>
+                El usuario seleccionado no tiene comisiones asignadas
+            </div>
+            <div class="divTables2" id="yesCommissions">
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="theadCss thL thLeftBorder">Curso</th>
+                            <th class="theadCss thL thIcon">Comisión</th>
+                            <th class="theadCss thS thRightBorder thIcon">
+                                <i class="fa-solid fa-xmark"></i>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody id="bodyCommissions"></tbody>                
+                </table>
+            </div>
+            
+        </div>
+        <div class="divButtonsRow">
+            <div id="editPopupAccept" class="button1 bm">Guardar</div>
+            <div id="editPopupCancel" class="button1 bm">Cancelar</div>
+        </div>
+    </div>
+</div>
+
+<!---Confirm personal data edition--->
+<div class="acceptCancelPopup" id="confirmEditionPopup">
+        
+    <div class="acppContent2">        
+        <div class="acceptCancelClosePopup" id="confirmEditionPopupClose">X</div>
+        <div class="acceptCancelIcon"><i class="fa-solid fa-user-pen"></i></div>
+        <div class="acppText2">
+            <div id="confirmEditionQuestion">¿Confirma que desea guardar los datos?</div> 
+        </div>
+        <div class="divButtonsRow">
+            <div id="confirmEditionPopupAccept" class="button1 bs">Aceptar</div>
+            <div id="confirmEditionPopupCancel" class="button1 bs">Cancelar</div>
+        </div>
+    </div>
+</div>
+<div class="okPopup" id="okEditPopup">
+    <div class="okContent">
+        <div class="okIcon"><i class="fa-regular fa-circle-check"></i></div>
+        <div class="okText">Datos editados con éxito</div>
+    </div>
+</div>
+
+<!---Create users popup--->
+<div class="acceptCancelPopup" id="createPopup">
+        
+    <div class="acceptCancelContent" id="createPopupContent">        
+        <div class="acceptCancelClosePopup" id="createPopupClose">X</div>
+        <div class="acceptCancelIcon"><i class="fa-solid fa-user-pen"></i></div>
+        
+        <div class="acceptCancelInputs mtm" id="createUserData">
+            <div id="uploadExcel">                
+                <i class="fa-regular fa-file-excel" id="uploadExcelIcon"></i>
+                <div id="showActionExcel">
+                    Subir datos desde Excel
+                </div>
+            </div>
+            <div id="uploadExcelPopup">                
+                <div id="uploadExcelcontent">
+                    <div>Subir archivo Excel</div>
+                    <input type="file" id="uploadExcelInput" name="excelFile">
+                    <div class="mts mbs" id="excelErrors">
+                        <div id="excelError1" class="notVisible">-Debe cargar al menos un usuario</div>
+                        <div id="excelError2" class="notVisible">-Se registraron campos incompletos en el archivo</div>
+                        <div id="excelError3" class="notVisible">-Supera la cantidad de licencias permitidas por perfil</div>
+                        <div id="excelError4" class="notVisible">-Se encontraron emails repetidos en el archivo</div>
+                        <div id="excelError5" class="notVisible">-Se están intentando cargar emails ya existentes en la base de usuarios</div>
+                    </div>                    
+                    
+                    <div class="divButtonsRow">
+                        <button id="uploadExcelAccept" type="button" class="button1 bm">Cargar usuarios</button>
+                        <button id="uploadExcelCancel" type="button" class="button1 bm">Cancelar</button>
+                    </div>
+                </div>
+                                
+            </div>
+            <div class="acceptCancelTitle" id="cudppTitle">
+                <div id="cudppTitleText">CREAR USUARIOS</div>
+                <div id="cudppTitleIcon"><i class="fa-solid fa-circle-info"></i></div>
+                <div id="createUsersQty"></div>
+            </div>
+            
+            <div class="divInputsRow mts">
+                <div class="divInput">
+                    <label class="label1 fwb">Perfil</label>
+                    <select class="input2 iS" id="createUserCategory">
+                        <option value="default"></option>                         
+                    </select>
+                </div>
+            </div>
+            <div class="divInputsRow mts">
+                <div class="divInput">
+                    <label class="label1 fwb">Apellido</label>
+                    <input type="text" class="input2 iS" id="createUserLastName">                    
+                </div>
+                <div class="divInput">
+                    <label class="label1 fwb">Nombre</label>
+                    <input type="text" class="input2 iS" id="createUserFirstName">                    
+                </div>
+                <div class="divInput">
+                    <label class="label1 fwb">Email</label>
+                    <input type="text" class="input2 iS" id="createUserEmail">                    
+                </div>
+                <div class="divInput">
+                    <label class="label1 fwb">DNI</label>
+                    <input type="number" class="input2 iXS" id="createUserDNI">                    
+                </div>
+                <div class="divInput" id="createUserIcon">
+                    <i class="fa-solid fa-plus"></i>
+                </div>
+            </div>
+            <div id="createError">
+                <i class="fa-solid fa-triangle-exclamation" id="createErrorIcon"></i>
+                <div id="createErrorText"></div>
+            </div>
+            <div id="usersToCreateTable" class="mts">
+                <div class="acceptCancelTitle">Usuarios a crear</div>
+                <div class="divTables2" id="">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="theadCss thM thLeftBorder">Perfil</th>
+                                <th class="theadCss thM">Apellido</th>
+                                <th class="theadCss thM">Nombre</th>
+                                <th class="theadCss thL">Email</th>
+                                <th class="theadCss thS">DNI</th>
+                                <th class="theadCss thS thRightBorder thIcon">
+                                    <i class="fa-solid fa-xmark"></i>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody id="bodyCreateUser"></tbody>                
+                    </table>
+                </div>
+            </div>
+            
+        </div>
+        <div class="acceptCancelInputs" id="createCommissionData">
+            <div class="acceptCancelTitle">Asignar comisión</div>
+            <div class="divInputsRow mts mbs">
+                <div class="divInput">
+                    <label class="label1 fwb">Curso</label>
+                    <select class="input2 iL" id="createUserCourse">
+                        <option value="default"></option>                         
+                    </select>
+                </div>
+                <div class="divInput">
+                    <label class="label1 fwb">Comisión</label>
+                    <select class="input2 iL" id="createUserCommission"></select>
+                </div>
+            </div>
+            <div id="createError2">
+                <i class="fa-solid fa-triangle-exclamation" id="createErrorIcon2"></i>
+                <div id="createErrorText2"></div>
+            </div>
+        </div>
+        <div class="divButtonsRow">
+            <div id="createPopupAccept" class="button1 bm">Guardar</div>
+            <div id="createPopupCancel" class="button1 bm">Cancelar</div>
+        </div>
+    </div>
+</div>
+
+<div class="okPopup" id="okCreatePopup">
+    <div class="okContent">
+        <div class="okIcon"><i class="fa-regular fa-circle-check"></i></div>
+        <div class="okText">Usuarios creados con éxito</div>
+    </div>
+</div>
+
+
+

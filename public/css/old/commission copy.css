@@ -1,0 +1,234 @@
+
+
+.commissionsBody{
+    width: calc(96vw - 200px);
+    position: absolute;
+    left: calc(200px + 1.5vw);
+    margin: 0px;
+}
+
+.divSimulator{
+    background-color: var(--color1);
+    color:white;
+    text-align: center;
+    margin: 15px auto 15px auto;
+    padding: 3px 0px;
+    width: 90%;
+    border-radius: 10px;
+    
+}
+
+.divExercAndStepsData{
+    display: flex;
+    margin-bottom: 5px;
+    justify-content: center;
+    column-gap: 15px;
+    font-size: 12px;
+    
+}
+
+.divExercAndStepsData > div {
+    align-self: flex-start; 
+}
+
+.divTablesCommissions{
+    height: 60vh;
+    overflow-y: auto;
+    width: fit-content;
+    margin: auto;
+}
+
+.tableCommissions{
+    font-size: 13px;
+    overflow-x: auto;
+}
+
+.divExTitle{
+    margin-bottom: 5px;
+    font-size: var(--thFontSize1);
+}
+
+.divExData{
+    margin-bottom: 2px;
+    font-size: var(--thFontSize1);
+}
+
+.divExercises{
+    width:fit-content;
+    border: var(--color3) solid 1px;
+    text-align: left;
+    padding: 8px 15px;
+    border-radius: 5px;
+}
+
+.divSteps{
+    width:fit-content;
+    border:var(--color6) solid 1px;
+    background-color: var(--color6);
+    text-align: left;
+    padding: 8px 15px;
+    border-radius: 5px;
+}
+
+.divAlert{
+    text-align: center;
+    font-size: var(--thFontSize1);
+    margin-top: 20px;
+}
+
+.divTable{
+    max-height: 700px;
+    overflow-y: auto;
+    width: fit-content;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 50px;
+}
+
+.thCommissions {
+    position: sticky;
+    top: 0;
+}
+
+.thCom1{
+    font-size: var(--thFontSize1);
+    color: white;
+    background-color: var(--color1);
+    padding: 3px 10px;
+    font-weight: lighter;
+}
+
+.thCom2:hover{
+    background-color: var(--color2);
+    cursor: pointer;
+}
+
+.thCom3{
+    background-color: var(--color5)
+}
+
+.tdCom1{
+    font-size: var(--thFontSize1);
+    background-color: var(--color3);
+    padding: 3px 2px;
+    text-align: center;
+    width: 200px;
+}
+
+.tdCom2{
+    width: 60px;
+}
+
+.tdCom3{
+    font-size: var(--thFontSize1);
+    background-color: var(--color6);
+    padding: 3px 2px;
+    text-align: center;
+}
+
+.fa-angle-right{
+    color: white
+}
+
+.plusCom{
+    color:var(--color4);
+    font-size: var(--thFontSize2);
+
+}
+
+.plusCom:hover{
+    cursor: pointer;
+}
+
+.selectedEx{
+    background-color: var(--color5);
+}
+
+.divObs{
+    position:absolute;
+    background-color: var(--color3);
+    z-index: 1;
+    border-radius:5px;
+    padding:10px;
+    padding-top: 0px;
+    width:fit-content;
+    max-width: 250px;
+}
+
+.divObs2{
+    background-color: var(--color6);
+}
+
+.closeObs{
+    background-color: var(--color1);
+    color: white;
+    border-radius: 2px;
+    font-size: var(--thFontSize1);
+    cursor: pointer;
+    position: relative;
+    border: red solid 1px;
+}
+
+.closeObs:hover{
+    background-color: var(--color4);
+}
+
+.divStudent{
+    margin-top:17px;
+    margin-bottom: 5px;
+    font-size:12px;
+    padding-right: 15px;
+   
+}
+
+.divExercise{
+    margin-top:0px;
+    font-size:12px;
+    margin-bottom:5px
+}
+
+.divExData2{
+    font-size:10px;
+    margin-bottom:3px;
+    width: 50px;
+    text-align: center;
+    border-bottom:black solid 1px
+}
+
+.divExData3{
+    font-size:10px;
+    margin-bottom:3px;
+    width: 70px;
+    text-align: center;
+    border-bottom:black solid 1px
+}
+
+.divStepsCodes{
+    font-size:10px;
+    margin-bottom:3px;
+    width: 25px;
+    text-align: center;
+    border-bottom:black solid 1px
+}
+
+.divFlexExDetails{
+    display: flex;
+    column-gap: 5px;
+}
+
+.divExInfo{
+    font-size:10px;
+    margin-bottom:3px;
+    width: 50px;
+    text-align: center;
+    border-bottom:black solid 1px
+}
+
+.divExInfo2{
+    font-size:10px;
+    margin-bottom:3px;
+    width: 70px;
+    text-align: center;
+    border-bottom:black solid 1px
+}
+

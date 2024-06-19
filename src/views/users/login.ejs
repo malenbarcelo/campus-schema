@@ -1,0 +1,39 @@
+<%- include('../partials/head') %>
+<%- include('../partials/header') %>
+
+<!---------------CONTENT--------------->
+<div class="mainTitleLogin">INICIAR SESIÓN</div>
+
+<div class="mainContentLogin">
+    <form action="/login" method="POST" name="formLogin" class="loginForm">
+
+        <div class="divInputsLogin">
+            <div class="divInputLogin">
+                <input type="text" name="email" placeholder="Email" class="inputLogin <%= locals.errors && errors.email ? 'isInvalid' : null %>" value="<%= locals.oldData ? oldData.email : null %>">
+                <div class="errorLogin">
+                    <% if (locals.errors && errors.email) { %>
+                        <%= errors.email.msg %>
+                    <% } %>
+                </div>
+            </div>
+            <div class="divInputLogin">
+                <input type="password" name="password" placeholder="Contraseña" class="inputLogin <%= locals.errors && errors.password ? 'isInvalid' : null %>" >
+                <div class="errorLogin">
+                    <% if (locals.errors && errors.password) { %>
+                        <%= errors.password.msg %> 
+                    <% } %>
+                </div>
+            </div>
+            <div class="">
+                <button type="submit" class="buttonLogin">Ingresar</button>
+            </div>
+        </div>
+    
+        
+        
+    </form>
+</div>
+
+
+    
+</div>
