@@ -321,6 +321,9 @@ window.addEventListener('DOMContentLoaded',async()=>{
         createUserCategory.innerHTML = '<option value="default"></option>'
 
         if (globals.idCompany != 'allCompanies') {
+
+            createCommissionData.style.display = 'block'
+
             const companyAdmins = await (await fetch(dominio + '/apis/tokens/tokens-to-assign/2/' + globals.idCompany)).json()
             globals.companyAdmins = companyAdmins.length
 
@@ -335,10 +338,26 @@ window.addEventListener('DOMContentLoaded',async()=>{
             createUserCategory.innerHTML += '<option value="2">Administrador institución</option>'
             createUserCategory.innerHTML += '<option value="3">Profesor</option>'
             createUserCategory.innerHTML += '<option value="4">Alumno</option>'
+
+            //complete commissions options
+            const companyCourses = courses.filter(c => c.id_companies == globals.idCompany)
+            createUserCourse.innerHTML = '<option value="default"></option>'
+            companyCourses.forEach(course => {
+                createUserCourse.innerHTML += '<option value="'+ course.id +'">' + course.course_name + '</option>'
+            })
             
         }else{
+            createCommissionData.style.display = 'none'
             createUserCategory.innerHTML += '<option value="1">Administrador general</option>'
             createUsersQty.innerHTML = 'Sólo puede crear usuarios <b>Administrador general</b>'
+        }
+
+        //add title
+        if (globals.idCompany == 'allCompanies') {
+            cuppTitleText.innerText = 'CREAR USUARIOS'
+        }else{
+            const company = companies.filter(c => c.id == globals.idCompany)[0].company_name
+            cuppTitleText.innerText = company + ' - CREAR USUARIOS'
         }
 
         createUserCategory.value = 'default'
@@ -426,15 +445,15 @@ window.addEventListener('DOMContentLoaded',async()=>{
         }, 1000)
     })
 
-    cudppTitleIcon.addEventListener("mouseover", async() => {
+    cuppTitleIcon.addEventListener("mouseover", async() => {
         createUsersQty.style.display = 'block'
     })
 
-    cudppTitleIcon.addEventListener("mouseout", async() => {
+    cuppTitleIcon.addEventListener("mouseout", async() => {
         createUsersQty.style.display = 'none'
     })
 
-    createUserIcon.addEventListener("click", async() => {        
+    createUserIcon.addEventListener("click", async() => {
         if (createUserCategory.value == 'default' || createUserLastName.value == '' || createUserFirstName.value == '' || createUserEmail.value == '' || createUserDNI.value == '') {
             createErrorText.innerText = 'Debe completar todos los campos'
             createError.style.display = 'flex'
@@ -563,60 +582,166 @@ window.addEventListener('DOMContentLoaded',async()=>{
     
     })
 
-    uploadExcelAccept.addEventListener("click", async() => {
+    uploadExcel.addEventListener("click", async() => {
+        uploadExcelPopup.style.display = 'block'
+    })
+
+    downloadTemplate.addEventListener("click", async() => {
+        const fileUrl = '/files/assignStudents/uploadUsersTemplate.xlsx'
+        const link = document.createElement('a')
+        link.href = fileUrl
+        link.download = 'uploadUsersTemplate.xlsx'
+        document.body.appendChild(link)
+        link.click()
+        document.body.removeChild(link)
+    })
+
+    uploadExcelPopupAccept.addEventListener("click", async() => {
+
+        console.log('hola')
         
         const file = uploadExcelInput.files[0]
         
         if (file) {
-            const teachersAllowed = await (await fetch(dominio + '/apis/tokens/tokens-to-assign/3/' + globals.idCompany)).json()
-            const studentsAllowed = await (await fetch(dominio + '/apis/tokens/tokens-to-assign/3/' + globals.idCompany)).json()
-            const adminsAllowed = await (await fetch(dominio + '/apis/tokens/tokens-to-assign/3/' + globals.idCompany)).json()
 
-            let students = 0
-            let teachers = 0
-            let admins = 0
+            const fileName = file.name;
+            const fileExtension = fileName.split('.').pop()
 
-            const formData = new FormData()
-            formData.append('excelFile', uploadExcelInput.files[0])
-
-            const response = await fetch('/apis/users/read-excel-file', {
-                method: 'POST',
-                body: formData
-              })
-
-            const data = await response.json()
-
-            //validations
-            //at least one user
-            if (data.length == 1) {
-            excelError1.classList.remove('notVisible')
+            if (fileExtension != 'xlsx' && fileExtension != 'xls') {
+                excelError.innerText = 'Las extensiones permitidas son ".xlsx" y ".xls"'
+                excelError.classList.remove('notVisible')
             }else{
-            excelError1.classList.add('notVisible')
-            }
+                const formData = new FormData()
+                formData.append('excelFile', uploadExcelInput.files[0])
 
-            //complete data
-            data.forEach(element => {
-                if (element[0] == '' || element[1] == '' || element[2] == '' || element[3] == '' || element[4] == '') {
-                    excelError2.classList.remove('notVisible')
-                }else{
-                    excelError2.classList.remove('notVisible')
+                const response = await fetch('/apis/users/read-excel-file', {
+                    method: 'POST',
+                    body: formData
+                  })
+    
+                let data = await response.json()
+                data.shift()
+
+                //get data for error
+                const teachersAllowed = await (await fetch(dominio + '/apis/tokens/tokens-to-assign/3/' + globals.idCompany)).json()
+                const studentsAllowed = await (await fetch(dominio + '/apis/tokens/tokens-to-assign/4/' + globals.idCompany)).json()
+                const adminsAllowed = await (await fetch(dominio + '/apis/tokens/tokens-to-assign/2/' + globals.idCompany)).json()
+                
+                let nullFields = 0
+                let students = 0
+                let teachers = 0
+                let admins = 0
+                let invalidEmails = 0
+                let repeatedEmails = 0
+                let existingUser = 0
+                let invalidIdCategories = 0
+
+                data.forEach(element => {
+                
+                    //null fields
+                    if (element[0] == null || element[1] == null || element[2] == null || element[3] == null || element[4] == null) {
+                        nullFields += 1
+                    }
+    
+                    //invalid mails
+                    const email = element[3]
+                    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+                    if (!regex.test(email)) {
+                        invalidEmails +=1
+                    }
+    
+                    //existting user
+                    const findUser = allUsers.filter(u => u.user_email == element[3])
+                    if (findUser.length > 0) {
+                        existingUser += 1
+                    }
+
+                    //find email in users to create
+                    const findEmail = globals.usersToCreate.filter( u => u.user_email == element[3])
+                    if (findEmail.length > 0) {
+                        repeatedEmails += 1
+                    }
+
+                    //invalid id categories
+                    if (globals.idCompany == 'allCompanies' && element[4] != 1) {
+                        invalidIdCategories +=1
+                    }
+                    if (globals.idCompany != 'allCompanies' && (element[4] != 2 && element[4] != 3 && element[4] != 4)) {
+                        invalidIdCategories +=1
+                    }
+    
+                    //tokens available
+                    students = element[4] == 4 ? (students + 1) : students
+                    teachers = element[4] == 3 ? (teachers + 1) : teachers
+                    admins = element[4] == 2 ? (admins + 1) : admins
+    
+                })
+
+                //repeated emails
+                const emails = data.map(subArray => subArray[3])
+                const uniqueEmails = [...new Set(emails)]
+                
+                if (emails.length > uniqueEmails.length) {
+                    repeatedEmails +=1
                 }
-            })
 
-            //   data.forEach(element => {
-            //     students = element[4] == 4 ? (students + 1) : students
-            //     teachers = element[4] == 3 ? (teachers + 1) : teachers
-            //     admins = element[4] == 2 ? (admins + 1) : admins
-            //   })
+                if (nullFields > 0) {
+                    excelError.innerText = 'Se detectaron campos vacíos en el archivo'
+                    excelError.classList.remove('notVisible')
+                }else{
+                    if (invalidEmails > 0) {
+                        excelError.innerText = 'Se detectaron emails inválidos en el archivo'
+                        excelError.classList.remove('notVisible')
+                    }else{
+                        if (repeatedEmails > 0) {
+                            excelError.innerText = 'Se detectaron emails repetidos'
+                            excelError.classList.remove('notVisible')
+                        }else{
+                            if (existingUser > 0) {
+                                excelError.innerText = 'Se detectaron emails que ya existen en la base de usuarios'
+                                excelError.classList.remove('notVisible')
+                            }else{
+                                if (invalidIdCategories > 0) {
+                                    excelError.innerText = 'Se detectaron categorías de usuarios inválidas'
+                                    excelError.classList.remove('notVisible')                                    
+                                }else{
+                                    if (globals.idCompany!='allCompanies' && (studentsAllowed.length < students || teachersAllowed.length < teachers || adminsAllowed.length < admins)) {
+                                        excelError.innerText = 'Excede la cantidad de licencias por perfil'
+                                        excelError.classList.remove('notVisible')
+                                    }else{
+                                        let newId = globals.usersToCreate.length + 1
 
-            //   console.log(students)
-            //   console.log(teachers)
-            //   console.log(admins)
+                                        data.forEach(element => {
+                                            newId = globals.usersToCreate.length + 1
+                                            const categoryName = usersCategories.filter(c => c.id == element[4])[0].category_name
 
+                                            globals.usersToCreate.push({
+                                                id: newId,
+                                                id_user_categories : element[4],
+                                                last_name: element[1],
+                                                first_name:element[0],
+                                                user_email: element[3],
+                                                id_document: element[2],
+                                                category_name: categoryName
+                                            })
+
+                                            newId += 1
+                                        })
+
+                                        printTableCreateUser(globals.usersToCreate)
+                                        uploadExcelPopup.style.display = 'none'
+                                        excelError.classList.add('notVisible')
+                                    }
+                                }                                
+                            }                        
+                        }
+                    }
+                }
+            }
         } else {
-            console.log('ingrese un archivo')
+
+            excelError.innerText = 'Debe cargar un archivo'
+            excelError.classList.remove('notVisible')
         }
     })
-
-
 })

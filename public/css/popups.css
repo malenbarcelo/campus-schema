@@ -11,7 +11,7 @@
 }
 
 #uploadExcelPopup{
-    /*display: none;*/
+    display: none;
     position: fixed;
     z-index: 1;
     left: 0;
@@ -21,10 +21,9 @@
     background-color: rgba(0,0,0,0.7);
 }
 #uploadExcelcontent{
-    margin: 10% 43%;
+    margin: 9% 38%;
     padding: 10px 20px;
-    width: max-content;
-    max-width: 400px;
+    width: 350px;
     border-radius: 5px;
     background-color: white;
     position: relative;
@@ -32,9 +31,18 @@
     font-size: 14px;
 }
 
+#uploadInputContent{
+    border:var(--color1) solid 2px;
+    padding: 10px 4px;
+    border-radius: 3px;
+    text-align: center;
+}
+
 #excelErrors{
-    font-size:12px;
-    color:var(--errorColor)
+    font-size:13px;
+    color:var(--errorColor);
+    text-align: center;
+    font-weight: bold;
 }
 
 /*-----contents-----*/
@@ -134,24 +142,24 @@
 }
 
 #createPopupContent{
-    margin: 2% 20%;
+    margin: 1% 20%;
     max-width: 1100px !important;
     width: 900px !important;
     height: 650px;
     position: relative;
 }
 
-#cudppTitle{
+#cuppTitle{
     display: flex;
     justify-content: center;
     align-items: center;
     column-gap: 5px;
     position: relative;
-    width: 300px;
+    width: 600px;
     margin: auto;
 }
 
-#cudppTitleIcon{
+#cuppTitleIcon{
     cursor:pointer;
     color:var(--color4)
 }
@@ -159,14 +167,16 @@
 #createUsersQty{
     position: absolute;
     font-size: 12px;
-    width: 350px;
     background-color: var(--color3);
-    left: 77%;
-    top: 50%;
+    left: 375px;
+    top: 100%;
     border-radius: 5px;
-    padding: 5px 0px;
+    padding: 5px 8px 5px 8px;
     z-index: 1;
     display: none;
+    width: 200px;
+    text-align: left;
+    font-weight: lighter;
 }
 
 #createUserData{
@@ -174,7 +184,7 @@
 }
 
 #createCommissionData{
-    height: 120px;
+    max-height: 120px;
 }
 
 #createError{
@@ -209,7 +219,7 @@
     right: 2%;
     top: 2%;
     border: var(--color1) dashed 3px;
-    font-size: 20px;
+    font-size: 18px;
     height: 30px;
     width: 30px;
     display: flex;
@@ -219,7 +229,15 @@
     cursor: pointer;
 }
 
-#uploadExcelIcon{
+#downloadTemplate{
+    position: absolute;
+    right: 3%;
+    top: 5%;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+#uploadExcelIcon,#downloadTemplateIcon{
     font-size: 20px;
     color:var(--color1)
 }
@@ -237,6 +255,10 @@
     display: block;
 }
 
+#downloadTemplate:hover #showActionTemplate{
+    display: block;
+}
+
 #showActionExcel{
     display: none;
     padding: 2px 5px;
@@ -245,6 +267,19 @@
     border-radius: 3px;
     color: var(--color1);
     top:105%;
+    text-align: center;
+    width: 80px;
+}
+
+#showActionTemplate{
+    display: none;
+    padding: 2px 5px;
+    position: absolute;
+    font-size: 12px;
+    border-radius: 3px;
+    color: var(--color1);
+    top:-4%;
+    right: 40%;
     text-align: center;
     width: 80px;
 }

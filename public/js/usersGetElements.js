@@ -89,21 +89,22 @@ function getElements() {
     const createError2 = document.getElementById('createError2')
     const createErrorText2 = document.getElementById('createErrorText2')
     const createCommissionData = document.getElementById('createCommissionData')
-    const cudppTitleIcon = document.getElementById('cudppTitleIcon')
-    const uploadExcelAccept = document.getElementById('uploadExcelAccept')
+    const cuppTitleIcon = document.getElementById('cudppTitleIcon')
+    const uploadExcelPopupAccept = document.getElementById('uploadExcelPopupAccept')
+    const uploadExcel = document.getElementById('uploadExcel')
     const uploadExcelInput = document.getElementById('uploadExcelInput')
-    const excelError1 = document.getElementById('excelError1')
-    const excelError2 = document.getElementById('excelError2')
-    const excelError3 = document.getElementById('excelError3')
-    const excelError4 = document.getElementById('excelError4')
-    const excelError5 = document.getElementById('excelError5')
-    
+    const uploadExcelPopupCancel = document.getElementById('uploadExcelPopupCancel')
+    const excelError = document.getElementById('excelError')
+    const downloadTemplate = document.getElementById('downloadTemplate')
+    const cuppTitleText = document.getElementById('cuppTitleText')
+    const createUserCourse = document.getElementById('createUserCourse')
+
     //define arrays with elements
     const thIcons = [thIcon1,thIcon2,thIcon3]
     const filters = [selectCompany,filterName,filterEmail,filterDni,filterCategory,filterDate]
     const DGAs = [DGAblockUsers,DGAassignCommissions,DGArestorePasswords]
     const DGAsassignCommissions = [DGAassignCommission,DGAassignCommissions]
-    const closeAndCancel = [blockPopupClose,blockPopupCancel,restorePopupClose,restorePopupCancel,assignPopupClose,assignPopupCancel,editPopupClose,editPopupCancel,confirmEditionPopupClose, confirmEditionPopupCancel,createPopupClose,createPopupCancel]
+    const closeAndCancel = [blockPopupClose,blockPopupCancel,restorePopupClose,restorePopupCancel,assignPopupClose,assignPopupCancel,editPopupClose,editPopupCancel,confirmEditionPopupClose, confirmEditionPopupCancel,createPopupClose,createPopupCancel,uploadExcelPopupCancel]
 
     return {thIcons,filters,DGAs,closeAndCancel,DGAsassignCommissions}
 }

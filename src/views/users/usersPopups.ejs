@@ -222,26 +222,29 @@
             </div>
             <div id="uploadExcelPopup">                
                 <div id="uploadExcelcontent">
-                    <div>Subir archivo Excel</div>
-                    <input type="file" id="uploadExcelInput" name="excelFile">
-                    <div class="mts mbs" id="excelErrors">
-                        <div id="excelError1" class="notVisible">-Debe cargar al menos un usuario</div>
-                        <div id="excelError2" class="notVisible">-Se registraron campos incompletos en el archivo</div>
-                        <div id="excelError3" class="notVisible">-Supera la cantidad de licencias permitidas por perfil</div>
-                        <div id="excelError4" class="notVisible">-Se encontraron emails repetidos en el archivo</div>
-                        <div id="excelError5" class="notVisible">-Se están intentando cargar emails ya existentes en la base de usuarios</div>
-                    </div>                    
-                    
+                    <div id="downloadTemplate">                
+                        <i class="fa-solid fa-download" id="downloadTemplateIcon"></i>
+                        <div id="showActionTemplate">
+                            Descargar template
+                        </div>
+                    </div>
+                    <div class="acceptCancelTitle">SUBIR ARCHIVO</div>
+                    <div id="uploadInputContent" class="mts">
+                        <input type="file" id="uploadExcelInput" name="excelFile">                        
+                    </div>
+                    <div id="excelErrors" class="mbm">
+                        <div id="excelError" class="notVisible"></div>
+                    </div>
                     <div class="divButtonsRow">
-                        <button id="uploadExcelAccept" type="button" class="button1 bm">Cargar usuarios</button>
-                        <button id="uploadExcelCancel" type="button" class="button1 bm">Cancelar</button>
+                        <button id="uploadExcelPopupAccept" type="button" class="button1 bs">Subir</button>
+                        <button id="uploadExcelPopupCancel" type="button" class="button1 bs">Cancelar</button>
                     </div>
                 </div>
                                 
             </div>
-            <div class="acceptCancelTitle" id="cudppTitle">
-                <div id="cudppTitleText">CREAR USUARIOS</div>
-                <div id="cudppTitleIcon"><i class="fa-solid fa-circle-info"></i></div>
+            <div class="acceptCancelTitle" id="cuppTitle">
+                <div id="cuppTitleText"></div>
+                <div id="cuppTitleIcon"><i class="fa-solid fa-circle-info"></i></div>
                 <div id="createUsersQty"></div>
             </div>
             
