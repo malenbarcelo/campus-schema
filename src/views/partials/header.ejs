@@ -5,7 +5,7 @@
         </div>
         <div class="divSideNav">
             <div class="divMenu">
-                <% if (locals.isLogged && (userLogged.id_user_categories == 1 || userLogged.id_user_categories == 2)) { %>
+                <% if (locals.isLogged && userLogged.id_user_categories == 1) { %>
                     <div class = "a1SideNavBar">ADMINISTRACIÓN</div>
                 <% } %>
                 <% if (locals.isLogged && userLogged.id_user_categories == 1) { %>
@@ -13,11 +13,9 @@
                     <a class = "a2SideNavBar" href="/users/create-company">Crear institución</a>
                     <a class = "a2SideNavBar" href="/simulators/create">Crear simulador</a>
                     <a class = "a2SideNavBar" href="/simulators/create-exercise">Crear ejercicio</a>
-                    <a class = "a2SideNavBar" href="/tokens/generate">Generar tokens</a>
+                    <a class = "a2SideNavBar" href="/tokens/generate">Generar Licencias</a>
                 <% } %>
-                <% if (locals.isLogged && (userLogged.id_user_categories == 1 ||userLogged.id_user_categories == 2 )) { %>
-                    <a class = "a2SideNavBar" href="/tokens/assignation">Asignar tokens</a>
-                <% } %>
+                
             </div>
             <div class="divMenu">
                 <% if (locals.isLogged ) { %>
@@ -26,7 +24,6 @@
                 <% if (locals.isLogged && (userLogged.id_user_categories == 1 ||userLogged.id_user_categories == 2 ) ) { %>
                     <a class = "a2SideNavBar" href="/courses/create-course">Crear curso</a>
                     <a class = "a2SideNavBar" href="/courses/create-commission">Crear comisión</a>
-                    <a class = "a2SideNavBar" href="/courses/students-assignation">Asignar alumnos</a>
                 <% } %>
                 <% if (locals.isLogged && (userLogged.id_user_categories != 1) ) { %>
                     <a class = "a2SideNavBar" href="/courses/my-courses">Mis Cursos</a>

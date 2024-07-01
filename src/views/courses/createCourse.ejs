@@ -16,9 +16,10 @@
         
         <div class="divInputsColumn mtm">
             <% if (user.id_user_categories == 1) { %>
-                <div class="divSelectCompany">
-                    <select name="selectCompany" class="input1 select1 <%= locals.errors && errors.selectCompany ? 'isInvalid' : null %>">
-                        <option value="default" selected>--Seleccione una institución--</option>
+                <div class="divInput">
+                    <label class="label1 fwb">Institución</label>
+                    <select name="selectCompany" class="input2 sXL <%= locals.errors && errors.selectCompany ? 'isInvalid' : null %>">
+                        <option value="default" selected></option>
                         <% companies.forEach(company => { %>
                             <% if (company.company_name != 'Schema') { %>
                                 <option value="<%= company.company_name %>" <%= locals.oldData && oldData.selectCompany == company.company_name ? 'selected' : null %>><%= company.company_name %></option>

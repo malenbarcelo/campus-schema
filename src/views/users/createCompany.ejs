@@ -2,49 +2,56 @@
 <%- include('../partials/header') %>
 <%- include('../partials/userLogged') %>
 
-<div class="divForm">
-    <h3 class="title1">Crear una institución</h3>
+<div class="mainTitle">CREAR INSTITUCIÓN</div>
 
-<form action="/users/create-company" method="POST" name="formCreateCompany" class="form1">    
-    <div>
-        <input type="text" name="company" placeholder="Institución" class="input1 <%= locals.errors && errors.company ? 'isInvalid' : null %>" value="<%= locals.oldData ? oldData.company : null %>">
-        <div class="divError1">
-            <% if (locals.errors && errors.company) { %>
-                <%= errors.company.msg %>
-            <% } %>
-        </div>
-    </div>
-    <div>
-        <input type="text" name="firstName" placeholder="Nombre del administrador" class="input1 <%= locals.errors && errors.firstName ? 'isInvalid' : null %>" value="<%= locals.oldData ? oldData.firstName : null %>">
-        <div class="divError1">
-            <% if (locals.errors && errors.firstName) { %>
-                <%= errors.firstName.msg %>
-            <% } %>
-        </div>
-    </div>
-    <div>
-        <input type="text" name="lastName" placeholder="Apellido del administrador" class="input1 <%= locals.errors && errors.lastName ? 'isInvalid' : null %>" value="<%= locals.oldData ? oldData.lastName : null %>">
-        <div class="divError1">
-            <% if (locals.errors && errors.lastName) { %>
-                <%= errors.lastName.msg %>
-            <% } %>
-        </div>
-    </div>
-    <div>
-        <input type="text" name="email" placeholder="Email del administrador" class="input1 <%= locals.errors && errors.email ? 'isInvalid' : null %>" value="<%= locals.oldData ? oldData.email : null %>">
-        <div class="divError1">
-            <% if (locals.errors && errors.email) { %>
-                <%= errors.email.msg %>
-            <% } %>
-        </div>
-    </div>
-    
-    <div>
-        <button type="submit" class="button1">Crear</button>
-        <!---<button type="reset" class="button1">Cancelar</button>--->
-    </div>
+<div class="mainContent">
 
-</form>
+    <form action="/users/create-company" method="POST" name="formCreateCompany" class="form1">
+        <div class="divInputsColumn">
+            <div class="divInput mtl">
+                <label class="label1 fwb">Institución</label>
+                <input type="text" name="company" class="input2 iXL <%= locals.errors && errors.company ? 'isInvalid' : null %>" value="<%= locals.oldData ? oldData.company : null %>">
+                <div class="divError1">
+                    <% if (locals.errors && errors.company) { %>
+                        <%= errors.company.msg %>
+                    <% } %>
+                </div>
+            </div>
+            <div class="divInput mtxs">
+                <label class="label1 fwb">Nombre del administrador</label>
+                <input type="text" name="firstName" class="input2 iXL <%= locals.errors && errors.firstName ? 'isInvalid' : null %>" value="<%= locals.oldData ? oldData.firstName : null %>">
+            </div>
+            <div class="divError1">
+                <% if (locals.errors && errors.firstName) { %>
+                    <%= errors.firstName.msg %>
+                <% } %>
+            </div>
+            <div class="divInput mtxs">
+                <label class="label1 fwb">Apellido del administrador</label>
+                <input type="text" name="lastName" class="input2 iXL <%= locals.errors && errors.lastName ? 'isInvalid' : null %>" value="<%= locals.oldData ? oldData.lastName : null %>">            
+            </div>
+            <div class="divError1">
+                <% if (locals.errors && errors.lastName) { %>
+                    <%= errors.lastName.msg %>
+                <% } %>
+            </div>
+            <div class="divInput mtxs">
+                <label class="label1 fwb">Email del administrador</label>
+                <input type="text" name="email" class="input2 iXL <%= locals.errors && errors.email ? 'isInvalid' : null %>" value="<%= locals.oldData ? oldData.email : null %>">            
+            </div>
+            <div class="divError1">
+                <% if (locals.errors && errors.email) { %>
+                    <%= errors.email.msg %>
+                <% } %>
+            </div>
+        </div>    
+        
+        
+        <div>
+            <button type="submit"  class="button1 bm mtl">Crear</button>
+        </div>
+
+    </form>
 
 
 </div>

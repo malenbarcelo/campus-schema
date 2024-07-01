@@ -86,7 +86,7 @@ const coursesFormsValidations = {
             .notEmpty().withMessage('Ingrese una fecha de finalización')
             .custom(async(value,{ req }) => {
                 if(req.body.endDateCommission < req.body.startDateCommission){
-                    throw new Error('La fecha de inicio del curso debe ser menor a la fecha de fin del')
+                    throw new Error('La fecha de inicio del curso debe ser menor a la fecha de fin del mismo')
                 }
                 return true
             })

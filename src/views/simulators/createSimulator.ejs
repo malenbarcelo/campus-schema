@@ -2,36 +2,44 @@
 <%- include('../partials/header') %>
 <%- include('../partials/userLogged') %>
 
-<div class="divForm">
+
     <% if (locals.successMessage) { %>
         <script>
             alertify.success('Simulador creado con éxito');
         </script>
     <% } %>
     
-    <h1 class="title1">Crear simulador</h1>
-    
-    <form action="/simulators/create" method="POST" name="formCreateSimulator" class="form1">
-        <div>
-            <input type="text" name="simulatorName" placeholder="Nombre del simulador" class="input1  <%= locals.errors && errors.simulatorName ? 'isInvalid' : null %>" value="<%= locals.oldData ? oldData.simulatorName : null %>">
-            <div class="divError1">
-                <% if (locals.errors && errors.simulatorName) { %>
-                    <%= errors.simulatorName.msg %>
-                <% } %>
-            </div>
-        </div>
-        <div>
-            <input type="text" name="simulatorDescription" placeholder="Descripción" class="input1 <%= locals.errors && errors.simulatorDescription ? 'isInvalid' : null %>" value="<%= locals.oldData ? oldData.simulatorDescription : null %>">
-            <div class="divError1"></div>
-        </div>
-        <div class="divButtons1">
-            <input type="submit" value="Crear" class="button1">
-            <!---<input type="button" value="Cancelar">--->
-        </div>
-    </form>
-    
+    <div class="mainTitle">CREAR SIMULADOR</div>
 
-</div>
+    <div class="mainContent">
+        <form action="/simulators/create" method="POST" name="formCreateSimulator" class="form1">
+
+            <div class="divInputsColumn">
+                <div class="divInput mtl">
+                    <label class="label1 fwb">Nombre del simulador</label>
+                    <input type="text" name="simulatorName" class="input2 sXL <%= locals.errors && errors.simulatorName ? 'isInvalid' : null %>" value="<%= locals.oldData ? oldData.simulatorName : null %>">
+                    <div class="divError1">
+                        <% if (locals.errors && errors.simulatorName) { %>
+                            <%= errors.simulatorName.msg %>
+                        <% } %>
+                    </div>
+                </div>
+                <div class="divInput mtxs">
+                    <label class="label1 fwb">Descripción del simulador</label>
+                    <input type="text" name="simulatorDescription" class="input2 iXL <%= locals.errors && errors.simulatorDescription ? 'isInvalid' : null %>" value="<%= locals.oldData ? oldData.simulatorDescription : null %>">
+                    <div class="divError1"></div>
+                </div>
+            </div>
+            
+            <div class="divButtons1">
+                <input type="submit" value="Crear" class="button1 bm">
+                <!---<input type="button" value="Cancelar">--->
+            </div>
+        </form>
+
+    </div>
+    
+    
 
 
 <script type="module" src="/js/createSimulator.js"></script>

@@ -40,8 +40,6 @@ accent-color: black
     flex-direction: column;
 }
 
-
-
 .input1  { /*without label*/ 
     background-color:var(--color3);
     border-radius:0px;
@@ -90,6 +88,11 @@ accent-color: black
 
 .iXL{
     width:350px;
+    padding: 10px 5px;
+}
+
+.sXL{ /*select*/
+    width:360px;
     padding: 10px 5px;
 }
 

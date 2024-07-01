@@ -77,6 +77,10 @@ body{
     padding-bottom: 50px;
 }
 
+.pls{
+    padding-left: 20px;
+}
+
 /*---------------------margin---------------------*/
 .mtl{
     margin-top: 40px;
@@ -87,6 +91,10 @@ body{
 
 .mts{
     margin-top: 15px;
+}
+
+.mtxs{
+    margin-top: 8px;
 }
 
 .mbs{

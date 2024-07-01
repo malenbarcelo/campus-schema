@@ -13,55 +13,60 @@
     </script>
 <% } %>
 
-<div class="divForm">
+<div class="mainTitle">GENERAR LICENCIAS</div>
+
+<div class="mainContent">    
     
-    <h1 class="title1">Generación de tokens</h1>
-<form action="/tokens/generate" method="POST" name="formTokenGeneration" class="form1">
-    <div>
-        <div>
-            <select name="company" class="input1 select1 <%= locals.errors && errors.company ? 'isInvalid' : null %>">
-                <option value="default" selected>--Seleccione una institución--</option>
-                <% companies.forEach(company => { %>
-                    <% if (company.company_name != 'Schema') { %>
-                        <option value="<%= company.company_name %>" <%= locals.oldData && oldData.company == company.company_name ? 'selected' : null %>><%= company.company_name %></option>
+    <form action="/tokens/generate" method="POST" name="formTokenGeneration" class="form1">
+        <div class="divInputsColumn">
+            <div>
+                <div class="divInput mtl">
+                    <label class="label1 fwb">Institución</label>
+                    <select name="company" class="input2 sXL <%= locals.errors && errors.company ? 'isInvalid' : null %>">
+                        <option value="default" selected></option>
+                        <% companies.forEach(company => { %>
+                            <% if (company.company_name != 'Schema') { %>
+                                <option value="<%= company.company_name %>" <%= locals.oldData && oldData.company == company.company_name ? 'selected' : null %>><%= company.company_name %></option>
+                            <% } %>
+                        <% }) %>
+                    </select>
+                </div>
+                <div class="divError1">
+                    <% if (locals.errors && errors.company) { %>
+                        <%= errors.company.msg %>
                     <% } %>
-                <% }) %>
-            </select>
-            <a href="/users/create-company" class="button1 button2">+</a>
+                </div>
+            </div>        
+            
+            <div class="divInput mtxs">
+                <label for="admTokens" class="label1 fwb">Licencias de administrador</label>
+                <input type="number" name="admTokens" class="input2 iXL <%= locals.errors && errors.admTokens ? 'isInvalid' : null %>" value="<%= locals.oldData ? oldData.admTokens : null %>">
+            </div>
+            <div class="divError1"></div>
+            
+            <div class="divInput mtxs">
+                <label for="teacherTokens" class="label1 fwb">Licencias de profesor</label>
+                <input type="number" name="teacherTokens" class="input2 iXL <%= locals.errors && errors.admTokens ? 'isInvalid' : null %>" value="<%= locals.oldData ? oldData.teacherTokens : null %>">
+            </div>
+            <div class="divError1"></div>
+            
+            <div class="divInput mtxs">
+                <label for="studentTokens" class="label1 fwb">Licencias de alumno</label>
+                <input type="number" name="studentTokens" class="input2 iXL <%= locals.errors && errors.admTokens ? 'isInvalid' : null %>" value="<%= locals.oldData ? oldData.studentTokens : null %>">
+            </div>
+            <div class="divError1">
+                <% if (locals.errors && errors.admTokens) { %>
+                    <%= errors.admTokens.msg %>
+                <% } %>
+            </div>
+
         </div>
-        <div class="divError1">
-            <% if (locals.errors && errors.company) { %>
-                <%= errors.company.msg %>
-            <% } %>
-        </div>
-    </div>        
-    
-    <div class="divFlex1">
-        <label for="admTokens" class="label1">Licencias de administrador</label>
-        <input type="number" name="admTokens" class="input2 <%= locals.errors && errors.admTokens ? 'isInvalid' : null %>" value="<%= locals.oldData ? oldData.admTokens : null %>">
-    </div>
-    <div class="divError1"></div>
-    
-    <div class="divFlex1">
-        <label for="teacherTokens" class="label1">Licencias de profesor</label>
-        <input type="number" name="teacherTokens" class="input2 <%= locals.errors && errors.admTokens ? 'isInvalid' : null %>" value="<%= locals.oldData ? oldData.teacherTokens : null %>">
-    </div>
-    <div class="divError1"></div>
-    
-    <div class="divFlex1">
-        <label for="studentTokens" class="label1">Licencias de alumno</label>
-        <input type="number" name="studentTokens" class="input2 <%= locals.errors && errors.admTokens ? 'isInvalid' : null %>" value="<%= locals.oldData ? oldData.studentTokens : null %>">
-    </div>
-    <div class="divError1">
-        <% if (locals.errors && errors.admTokens) { %>
-            <%= errors.admTokens.msg %>
-        <% } %>
-    </div>
-    <div>
-        <input type="submit" value="Generar" class="button1">
-        <!---<input type="reset" value="Cancelar" class="button1">--->
-    </div>        
-</form>
+        
+        <div>
+            <input type="submit" value="Generar" class="button1 bm mtl">
+            <!---<input type="reset" value="Cancelar" class="button1">--->
+        </div>        
+    </form>
 
 </div>
 

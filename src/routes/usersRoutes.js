@@ -6,6 +6,10 @@ const guestMiddleWare = require('../middlewares/guestMiddleware.js')
 const authMiddleware = require('../middlewares/authMiddleware.js')
 const admMiddleware = require('../middlewares/admMiddleware.js')
 
+
+router.get('/create-company',admMiddleware,usersController.createCompany)
+router.post('/create-company',admMiddleware,userFormsValidations.createCompanyFormValidations,usersController.processCreateCompany)
+
 /*router.get('/',guestMiddleWare,usersController.login)
 router.get('/login',guestMiddleWare,usersController.login)
 router.post('/login',userFormsValidations.loginFormValidations,usersController.processLogin)

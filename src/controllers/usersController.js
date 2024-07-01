@@ -28,14 +28,6 @@ const usersController = {
             res.send(error)            
         }
     },
-    
-
-
-
-
-
-
-    
     createCompany: (req,res) => {
         return res.render('users/createCompany',{title:'Crear institución'})
     },
@@ -62,6 +54,8 @@ const usersController = {
                 raw:true,
             })
             //create user
+            const date = new Date()
+
             await db.Users.create({
                 first_name: req.body.firstName,
                 last_name: req.body.lastName,
@@ -69,6 +63,7 @@ const usersController = {
                 password:bcrypt.hashSync(req.body.email,10),
                 enabled:1,
                 id_user_categories:2,
+                register_date:date,
                 id_companies:idCompany.id
             })
             //get user created id
@@ -96,6 +91,16 @@ const usersController = {
             res.send(error)
         }
     },
+    
+
+
+
+
+
+
+    
+    
+    
     changePassword: (req,res) =>{
         return res.send('')
     },

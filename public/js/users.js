@@ -368,6 +368,7 @@ window.addEventListener('DOMContentLoaded',async()=>{
         createError.style.display = 'none'
         createError2.style.display = 'none'
         globals.usersToCreate = []
+        excelError.classList.add('notVisible')
         createPopup.style.display = 'block'
 
     })
@@ -597,8 +598,6 @@ window.addEventListener('DOMContentLoaded',async()=>{
     })
 
     uploadExcelPopupAccept.addEventListener("click", async() => {
-
-        console.log('hola')
         
         const file = uploadExcelInput.files[0]
         
