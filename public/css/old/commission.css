@@ -6,6 +6,7 @@
     border-radius:5px;
     width:fit-content;
     padding: 0px 8px 8px 8px;
+    border: var(--color1) solid 2px;
 }
 
 #divX2{
@@ -66,7 +67,7 @@
 }
 
 .tableCommissions{
-    font-size: 13px;
+    font-size: 12px;
     overflow-x: auto;
 }
 
@@ -123,6 +124,7 @@
     background-color: var(--color1);
     padding: 3px 10px;
     font-weight: lighter;
+    border: white solid 1px;
 }
 
 .thCom2:hover{
@@ -131,26 +133,30 @@
 }
 
 .thCom3{
-    background-color: var(--color5)
+    background-color: var(--color5);
+    
 }
 
 .tdCom1{
-    font-size: var(--thFontSize1);
+    font-size: 11px;
     background-color: var(--color3);
-    padding: 3px 2px;
+    padding: 5px 2px;
     text-align: center;
     width: 200px;
+    border: white solid 1px;
 }
 
 .tdCom2{
     width: 60px;
+    border: white solid 1px;
 }
 
 .tdCom3{
-    font-size: var(--thFontSize1);
+    font-size: 11px;
     background-color: var(--color6);
     padding: 3px 2px;
     text-align: center;
+    border: white solid 1px;
 }
 
 .fa-angle-right{
@@ -176,21 +182,34 @@
     background-color: var(--color3);
     z-index: 1;
     border-radius:5px;
-    padding:10px;
+    padding: 5px;
     padding-top: 0px;
     width:fit-content;
-    max-width: 250px;
+    min-width: 120px;
+    max-width: 300px;
     font-size: 12px;
+    border: var(--color1) solid 2px;
 }
 
 .divObs2{
     background-color: var(--color6);
 }
 
+.closeObservations{
+    cursor: pointer;
+    text-align: right;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.closeObservations:hover{
+    color:var(--color4)
+}
+
 
 
 .divStudent{
-    margin-top:17px;
+    margin-top:0px;
     margin-bottom: 5px;
     font-size:12px;
     padding-right: 15px;
@@ -200,7 +219,7 @@
 .divExercise{
     margin-top:0px;
     font-size:12px;
-    margin-bottom:5px
+    margin-bottom:15px;
 }
 
 .divExData2{

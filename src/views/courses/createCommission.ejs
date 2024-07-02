@@ -33,7 +33,7 @@
                 </div>            
             <% } %>
             
-            <div class="divInput">
+            <div class="divInput <%= user.id_user_categories != 1 ? 'mtl' : null %>">
                 <label class="label1 fwb">Curso</label>
                 <select name="courseName" id="selectCourse" class="input2 iXL <%= locals.errors && errors.courseName ? 'isInvalid' : null %>">
                     <option value="default" selected></option>
