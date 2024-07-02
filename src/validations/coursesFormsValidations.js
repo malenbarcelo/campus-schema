@@ -153,7 +153,8 @@ const coursesFormsValidations = {
                                     where:{
                                         user_email:emails[i][0],
                                         id_user_categories:4,
-                                        id_companies: idCompany
+                                        id_companies: idCompany,
+                                        enabled:1
                                     },
                                     nest:true,
                                     raw:true

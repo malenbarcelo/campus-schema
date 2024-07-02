@@ -25,28 +25,28 @@ const storage = multer.diskStorage({
 const upload = multer({storage: storage})
 
 //users
-router.get('/users',apisController.users)
-router.get('/users/users-categories',apisController.usersCategories)
-router.post('/users/block-users',apisController.blockUsers)
-router.post('/users/assign-commission',apisController.assignCommission)
-router.post('/users/restore-passwords',apisController.restorePasswords)
-router.post('/users/edit-user-data',apisController.editUserData)
-router.post('/users/create-users',apisController.createUsers)
-router.post('/users/read-excel-file',upload.single('excelFile'),apisController.readExcelFile)
-router.get('/users/:idCompany',apisController.companyUsers)
+router.get('/users',admsMiddleware,apisController.users)
+router.get('/users/users-categories',admsMiddleware,apisController.usersCategories)
+router.post('/users/block-users',admsMiddleware,apisController.blockUsers)
+router.post('/users/assign-commission',admsMiddleware,apisController.assignCommission)
+router.post('/users/restore-passwords',admsMiddleware,apisController.restorePasswords)
+router.post('/users/edit-user-data',admsMiddleware,apisController.editUserData)
+router.post('/users/create-users',admsMiddleware,apisController.createUsers)
+router.post('/users/read-excel-file',admsMiddleware,upload.single('excelFile'),apisController.readExcelFile)
+router.get('/users/:idCompany',admsMiddleware,apisController.companyUsers)
 router.get('/users/find-user/:email',apisController.loginValidation) //API to Novaoil Rockit
 
 //companies
-router.get('/companies',apisController.companies)
+router.get('/companies',admsMiddleware,apisController.companies)
 
 //courses
-router.get('/courses',apisController.courses)
+router.get('/courses',admsMiddleware,apisController.courses)
 
 //commissions
-router.get('/commissions',apisController.commissions)
-router.get('/commissions/user-commissions/:idCompany/:idUser',apisController.userCommissionCompany)
-router.post('/commissions/delete-commissions-students',apisController.deleteCommissionsStudents)
-router.post('/commissions/add-commissions-students',apisController.addCommissionsStudents)
+router.get('/commissions',admsMiddleware,apisController.commissions)
+router.get('/commissions/user-commissions/:idCompany/:idUser',admsMiddleware,apisController.userCommissionCompany)
+router.post('/commissions/delete-commissions-students',admsMiddleware,apisController.deleteCommissionsStudents)
+router.post('/commissions/add-commissions-students',admsMiddleware,apisController.addCommissionsStudents)
 
 //tokens
 router.get('/tokens/tokens-to-assign/:idUserCategory/:idCompany',apisController.tokensToAssign)

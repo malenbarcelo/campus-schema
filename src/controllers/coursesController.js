@@ -642,7 +642,144 @@ const coursesController = {
         }catch(error){
           return res.send('Error')
         }
-      },     
+      },
+      assignStudents: async(req,res) => {
+        try{
+            const students = await db.Users.findAll({
+                where:{
+                    id_user_categories:4,
+                    id_companies:req.session.userLogged.id_companies
+                },
+                nest:true,
+                raw:true
+            })
+            const companies = await db.Companies.findAll({raw:true,nest:true})
+            
+            const courses = await db.Courses.findAll({
+                where: {id_companies:req.session.userLogged.id_companies},
+                raw:true,
+                nest:true
+            })
+
+            return res.render('courses/assignStudents',{
+                title:'Asignar alumnos',
+                companies,
+                courses,
+                students,
+                user:req.session.userLogged
+            })
+
+        }catch(error){
+            return res.send("Error")
+        }
+    },
+    processAssignStudents: async(req,res) => {
+        try{
+            const companies = await db.Companies.findAll({raw:true,nest:true})
+
+            var idCompany = ''
+            
+            if(req.session.userLogged.id_user_categories == 1 && req.body.selectCompany != 'default' ){
+                const company = await db.Companies.findAll({
+                    where:{company_name:req.body.selectCompany},
+                    raw:true
+                })
+                idCompany = company[0].id                
+            }else{
+                idCompany = req.session.userLogged.id_companies
+            }
+            const courses = await db.Courses.findAll({
+                where: {id_companies:idCompany},
+                raw:true,
+                nest:true
+            })
+            const students = await db.Users.findAll({
+                where:{
+                    id_user_categories:4,
+                    id_companies:idCompany
+                },
+                nest:true,
+                raw:true
+            })
+
+            const resultValidation = validationResult(req)
+
+            if (resultValidation.errors.length > 0){
+                const courseCommissions = await db.Course_commissions.findAll({
+                    include: [{association: "course_commission_course"}],
+                    nest:true,
+                    raw:true
+                })
+                const commissionsFiltered = []
+                courseCommissions.forEach(courseCommission => {
+                    if(courseCommission.course_commission_course.course_name == req.body.selectCourse){
+                        commissionsFiltered.push(courseCommission)
+                    }
+
+                });
+
+                return res.render('courses/assignStudents',{
+                    errors:resultValidation.mapped(),
+                    oldData: req.body,
+                    title:'Asignar alumnos',
+                    companies,
+                    courses,
+                    students,
+                    commissionsFiltered,
+                    user:req.session.userLogged
+                    })
+            }
+
+            const file = req.file.filename
+            idCommission = req.body.selectCommission
+            const emails = await readXlsFile('public/files/assignStudents/' + file)
+
+            const studentsToAssign = await db.Users.findAll({
+                attributes:['id'],
+                where:{
+                    user_email: emails,
+                },
+                nest:true,
+                raw:true
+            })
+
+            const studentsCommissions= []
+
+            for (let i = 0; i < studentsToAssign.length; i++) {
+                const validation = await db.Course_commissions_students.findOne({
+                    where:{
+                        id_course_commissions:parseInt(idCommission),
+                        id_students:studentsToAssign[i].id
+                    }
+                })
+                if(!validation){
+                    studentsCommissions.push({
+                        id_course_commissions:parseInt(idCommission),
+                        id_students:studentsToAssign[i].id
+                    })
+                }
+            }
+
+            for (let i = 0; i < studentsCommissions.length; i++){
+                await db.Course_commissions_students.create(studentsCommissions[i])
+            }
+
+            const successMessage = true
+
+            return res.render('courses/assignStudents',{
+                title:'Asignar alumnos',
+                companies,
+                courses,
+                students,
+                successMessage,
+                user:req.session.userLogged
+            })
+
+
+        }catch(error){
+            res.send('Error')
+        }
+    },     
 }
 
 module.exports = coursesController

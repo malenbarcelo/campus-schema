@@ -112,3 +112,10 @@ body{
 .fcg{
     color: grey;
 }
+
+/*---------------------errors---------------------*/
+.divError{
+    color:var(--errorColor);
+    font-size: 12px;
+    font-weight: bold;
+}

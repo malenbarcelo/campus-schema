@@ -17,7 +17,7 @@ window.addEventListener('load',async()=>{
 
         selectCompany.addEventListener("change",async(e)=>{
 
-            selectCommission.innerHTML='<option value="default" selected>--Seleccione una comisión--</option>'
+            selectCommission.innerHTML='<option value="default" selected></option>'
 
             const selectedOption = (e.target.options[e.target.selectedIndex]).innerText
 
@@ -44,14 +44,14 @@ window.addEventListener('load',async()=>{
 
                 //get company courses
                 const companyCourses = await (await fetch(dominio + '/apis/company-courses/' + idCompany)).json()
-                selectCourse.innerHTML='<option value="default" selected>--Seleccione una curso--</option>'
+                selectCourse.innerHTML='<option value="default" selected></option>'
                 for (let i = 0; i < companyCourses.length; i++) {
                     selectCourse.innerHTML += '<option value=' + companyCourses[i].course_name + '>' + companyCourses[i].course_name + '</option>'
                 }
 
             }else{
                 noteForAdministrator.innerHTML = ''
-                selectCourse.innerHTML='<option value="default" selected>--Seleccione una curso--</option>'
+                selectCourse.innerHTML='<option value="default" selected></option>'
             }
         })
     }else{
@@ -81,7 +81,7 @@ window.addEventListener('load',async()=>{
             })
         }
 
-        selectCommission.innerHTML='<option value="default" selected>--Seleccione una comisión--</option>'
+        selectCommission.innerHTML='<option value="default" selected></option>'
 
         for (let i = 0; i < commissionsForSelect.length; i++) {
             selectCommission.innerHTML += '<option value=' + commissionsForSelect[i].id + '>' + commissionsForSelect[i].commissionName + '</option>'

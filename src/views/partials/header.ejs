@@ -24,6 +24,7 @@
                 <% if (locals.isLogged && (userLogged.id_user_categories == 1 ||userLogged.id_user_categories == 2 ) ) { %>
                     <a class = "a2SideNavBar" href="/courses/create-course">Crear curso</a>
                     <a class = "a2SideNavBar" href="/courses/create-commission">Crear comisión</a>
+                    <a class = "a2SideNavBar" href="/courses/students-assignation">Asignar alumnos</a>
                 <% } %>
                 <% if (locals.isLogged && (userLogged.id_user_categories != 1) ) { %>
                     <a class = "a2SideNavBar" href="/courses/my-courses">Mis Cursos</a>
