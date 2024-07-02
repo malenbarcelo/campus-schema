@@ -1,4 +1,4 @@
-export const dominio = 'http://localhost:3003'
+export const dominio = 'https://campus.schemasim.com/'
 
 
 
