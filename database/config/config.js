@@ -1,6 +1,10 @@
-const username = "malenbar_malenbarcelo"
-const password = "30941767Male-"
-const database = "malenbar_schema_sim"
+const username = "schemasim_adm"
+const password = "schemasimadm"
+const database = "schemasim_db"
+
+// const username = "schemasim_adm"
+// const password = "schemasimadm"
+// const database = "schemasim_db"
 
 module.exports=
 {
