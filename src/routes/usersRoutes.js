@@ -14,16 +14,16 @@ router.post('/change-password',userFormsValidations.changePswFormValidations,use
 router.get('/login',guestMiddleWare,usersController.login)
 router.post('/login',userFormsValidations.loginFormValidations,usersController.processLogin)
 
-/*router.get('/',guestMiddleWare,usersController.login)
-router.get('/login',guestMiddleWare,usersController.login)
-router.post('/login',userFormsValidations.loginFormValidations,usersController.processLogin)
+
 router.get('/logout',authMiddleware,usersController.logout)
-router.get('/create-company',admMiddleware,usersController.createCompany)
-router.post('/create-company',admMiddleware,userFormsValidations.createCompanyFormValidations,usersController.processCreateCompany)
-router.get('/change-password',usersController.changePassword)
-router.post('/change-password',userFormsValidations.changePswFormValidations,usersController.processChangePassword)
+
+//router.get('/',guestMiddleWare,usersController.login)
+
+router.get('/logout',authMiddleware,usersController.logout)
+
+
 router.get('/restore-password',admMiddleware,usersController.restorePassword)
-router.post('/restore-password',admMiddleware,userFormsValidations.restorePswFormValidations,usersController.processRestorePassword)*/
+router.post('/restore-password',admMiddleware,userFormsValidations.restorePswFormValidations,usersController.processRestorePassword)
 
 ///2.0
 router.get('/',usersController.users)

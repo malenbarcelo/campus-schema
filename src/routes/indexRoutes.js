@@ -9,9 +9,6 @@ const admMiddleware = require('../middlewares/admMiddleware.js')
 router.get('/',guestMiddleWare,indexController.login)
 router.post('/login',userFormsValidations.loginFormValidations,indexController.processLogin)
 router.get('/logout',authMiddleware,indexController.logout)
-/*router.get('/login',guestMiddleWare,indexController.login)
-router.post('/login',userFormsValidations.loginFormValidations,indexController.processLogin)
-router.get('/logout',authMiddleware,indexController.logout)*/
-
+router.get('/login',guestMiddleWare,indexController.login)
 
 module.exports = router

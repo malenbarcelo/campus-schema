@@ -34,6 +34,7 @@ router.post('/users/edit-user-data',admsMiddleware,apisController.editUserData)
 router.post('/users/create-users',admsMiddleware,apisController.createUsers)
 router.post('/users/read-excel-file',admsMiddleware,upload.single('excelFile'),apisController.readExcelFile)
 router.get('/users/:idCompany',admsMiddleware,apisController.companyUsers)
+router.get('/users/:email',apisController.loginValidation)
 router.get('/users/find-user/:email',apisController.loginValidation) //API to Novaoil Rockit
 
 //companies
