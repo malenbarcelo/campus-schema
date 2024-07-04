@@ -11,7 +11,7 @@ router.get('/create-company',admMiddleware,usersController.createCompany)
 router.post('/create-company',admMiddleware,userFormsValidations.createCompanyFormValidations,usersController.processCreateCompany)
 router.get('/change-password',usersController.changePassword)
 router.post('/change-password',userFormsValidations.changePswFormValidations,usersController.processChangePassword)
-//router.get('/login',guestMiddleWare,usersController.login)
+router.get('/login',guestMiddleWare,usersController.login)
 
 /*router.get('/',guestMiddleWare,usersController.login)
 router.get('/login',guestMiddleWare,usersController.login)
