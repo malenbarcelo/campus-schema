@@ -123,7 +123,7 @@ async function getUsers(companies) {
         users = await (await fetch(dominio + '/apis/users')).json()
     }else{ // user logged is "Administrador institución"
         const idCompany = companies.filter(c => c.company_name == companyName.innerText)[0].id
-        users = await (await fetch(dominio + '/apis/users/' + idCompany)).json()
+        users = await (await fetch(dominio + '/apis/users/company-users/' + idCompany)).json()
     }
 
     return users
