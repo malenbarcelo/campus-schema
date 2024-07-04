@@ -6,6 +6,55 @@ const usersQueries = require('./dbQueries/usersQueries')
 const companiesQueries = require('./dbQueries/companiesQueries')
 
 const usersController = {
+    login: (req,res) => {
+        req.session.destroy()
+        /*if (req.session.userLogged) {
+            return res.redirect('/logout')
+        }*/
+        return res.render('users/login',{title:'Iniciar Sesión'})        
+    },
+    processLogin: async(req, res) => {
+        try{
+            const resultValidation = validationResult(req)
+            if (resultValidation.errors.length > 0){
+                return res.render('users/login',{
+                    errors:resultValidation.mapped(),
+                    oldData: req.body,
+                    title:'Iniciar Sesión'
+                })
+            }
+            
+            if(req.body.email == req.body.password){
+                const alertMessage = 'Debe cambiar la contraseña'
+                const email = req.body.email
+                return res.render('users/changePassword',{
+                    oldData: req.body,
+                    title:'Cambiar contraseña',
+                    alertMessage
+                })
+            }
+            const userToLogin = await db.Users.findOne({
+                where:{user_email:req.body.email},
+                nest:true,
+                raw:true
+            })
+
+            delete userToLogin.password
+
+            req.session.userLogged = userToLogin
+            
+            if (userToLogin.id_user_categories == 1) {
+                return res.redirect('/tokens/generate')
+            }
+            else{
+                return res.redirect('/courses/my-courses')
+            }
+                        
+        }catch(error){
+                res.send('Ha ocurrido un error')
+            }
+    },
+
     users: async(req,res) => {
         try{
             
