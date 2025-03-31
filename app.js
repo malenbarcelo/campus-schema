@@ -61,7 +61,7 @@ app.use('/simulators',simulatorsRoutes)
 
 app.use('/companies',companiesRoutes)
 
-//console.log(bcrypt.hashSync('user1',10))
+console.log(bcrypt.hashSync('user1',10))
 
 
 

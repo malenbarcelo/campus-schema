@@ -43,16 +43,9 @@
                 
             <% } %>
     
-            <% if (user.id_user_categories == 2) { %>
-                <div class="div5" id="noteForCompanies">        
-                    <p class="p1"><i class="fa-solid fa-triangle-exclamation"></i> Puede asignar un máximo de <%= students.length %> alumnos a cada comisión, en caso de necesitar más cupos, solicite nuevas licencias de alumnos para la institución.</p>
-                </div>
-            <% } %>
-            <% if (user.id_user_categories == 1) { %>
-                <div class="div5" id="noteForAdministrator"></div>
-            <% } %>
+            
     
-            <div class="divInput">
+            <div class="divInput mts">
                 <label class="label1 fwb">Curso</label>
                 <select name="selectCourse" class="input2 iXL <%= locals.errors && errors.selectCourse ? 'isInvalid' : null %>" id="selectCourse">
                     <option value="default" selected></option>    

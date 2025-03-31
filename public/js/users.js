@@ -90,7 +90,7 @@ window.addEventListener('DOMContentLoaded',async()=>{
         await fetch(dominio + '/apis/users/block-users',{
             method:'POST',
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(data)  
+            body: JSON.stringify(data)
         })
 
         //get updated users
@@ -134,7 +134,7 @@ window.addEventListener('DOMContentLoaded',async()=>{
         unCheckElements(usersToUncheck)
         hideDGAs()
 
-        restorePopup.style.display = 'none'        
+        restorePopup.style.display = 'none'
         okRestorePopup.style.display = 'block';
 
         //hide okPopup after one second
@@ -146,7 +146,7 @@ window.addEventListener('DOMContentLoaded',async()=>{
 
     //editPopup event listeners
     selectCourseAssign.addEventListener("change", async() => {
-        
+
         selectCommissionAssign.innerHTML = '<option value="default" selected></option>'
 
         if (selectCourseAssign.value != 'default') {
@@ -160,10 +160,10 @@ window.addEventListener('DOMContentLoaded',async()=>{
             filteredCommissions.forEach(element => {
                 const startDate = dateToString(element.start_date)
                 const endDate = dateToString(element.end_date)
-                
+
                 selectCommissionAssign.innerHTML += '<option value=' + element.id + '>' + element.commission + ' (' + startDate + ' - ' + endDate +')</option>'
             })
-            
+
         }
     })
 
@@ -171,7 +171,7 @@ window.addEventListener('DOMContentLoaded',async()=>{
 
         if (selectCommissionAssign.value == 'default') {
             selectCommissionErrorText.innerText = 'Debe elegir una comisión'
-            selectCommissionError.style.display = 'flex'           
+            selectCommissionError.style.display = 'flex'
         }else{
             //assign from DGAs users.ejs
             if (assignFrom.innerText == 'DGAassignCommissions') {
@@ -215,7 +215,7 @@ window.addEventListener('DOMContentLoaded',async()=>{
                 const commissionToAdd = commissions.filter( c => c.id == selectCommissionAssign.value)[0]
 
                 const id = globals.newCommissions.reduce((max, obj) => (obj.id > max ? obj.id : max), 0) + 1
-                
+
                 globals.newCommissions.push({
                     id:id,
                     id_course_commissions: selectCommissionAssign.value,
@@ -233,15 +233,15 @@ window.addEventListener('DOMContentLoaded',async()=>{
                     id_course_commissions:selectCommissionAssign.value,
                     id_students:globals.selectedUsers[0].id
                 })
-                
+
                 printTableCommissions(globals.newCommissions)
-                
+
             }
             noCommissions.classList.add('notVisible')
             yesCommissions.classList.remove('notVisible')
-            assignPopup.style.display = 'none' 
-        }        
-            
+            assignPopup.style.display = 'none'
+        }
+
     })
 
     //selectAll
@@ -249,12 +249,12 @@ window.addEventListener('DOMContentLoaded',async()=>{
         const usersToCheck =  filtersApplied == 'no' ? users : usersFiltered
         globals.selectedUsers = []
         if (selectAll.checked) {
-            
+
             showDGAs()
 
             //check elements
             usersToCheck.forEach(user => {
-                const select = document.getElementById('select_' + user.id)                                
+                const select = document.getElementById('select_' + user.id)
                 select.checked = true
                 globals.selectedUsers.push(user)
             })
@@ -271,16 +271,16 @@ window.addEventListener('DOMContentLoaded',async()=>{
 
         blockPopup.style.top = position.top + 'px'
         blockPopup.style.left = position.left + 'px'*/
-        
-        blockUsersQuestion.innerText = '¿Confirma que desea dar de baja a los usuarios seleccionados?'            
+
+        blockUsersQuestion.innerText = '¿Confirma que desea dar de baja a los usuarios seleccionados?'
         userToBlock.innerHTML = ''
-        blockPopup.style.display = 'block'        
+        blockPopup.style.display = 'block'
     })
 
     DGArestorePasswords.addEventListener("click", async() => {
-        restoreQuestion.innerText = '¿Confirma que desea restablecer las contraseñas de los usuarios seleccionados?'            
+        restoreQuestion.innerText = '¿Confirma que desea restablecer las contraseñas de los usuarios seleccionados?'
         userToRestore.innerHTML = ''
-        restorePopup.style.display = 'block'        
+        restorePopup.style.display = 'block'
     })
 
     DGAsassignCommissions.forEach(DGA => {
@@ -289,24 +289,24 @@ window.addEventListener('DOMContentLoaded',async()=>{
             selectCommissionError.style.display = 'none'
 
             assignFrom.innerText = DGA.id == 'DGAassignCommissions' ? 'DGAassignCommissions' : 'DGAassignCommission'
-    
+
             //get courses
             const filteredCourses = globals.idCompany == 'allCompanies' ? courses : courses.filter(c => c.id_companies == globals.idCompany)
-            
+
             //add selectCourse options
             selectCourseAssign.innerHTML = '<option value="default" selected></option>'
-                
+
             filteredCourses.forEach(element => {
                 selectCourseAssign.innerHTML += '<option value=' + element.id + '>' + element.course_name +'</option>'
             })
-    
+
             //restore selectCommission
             selectCommissionAssign.innerHTML = '<option value="default" selected></option>'
-    
+
             assignPopup.style.display = 'block'
-        })        
-    
-    })    
+        })
+
+    })
 
     DGAblockFromEdit.addEventListener("click", async() => {
         const selectedUser = userId.innerText
@@ -329,7 +329,7 @@ window.addEventListener('DOMContentLoaded',async()=>{
 
             const teachersToAssign = await (await fetch(dominio + '/apis/tokens/tokens-to-assign/3/' + globals.idCompany)).json()
             globals.teachersToAssign = teachersToAssign.length
-            
+
             const studentsToAssign = await (await fetch(dominio + '/apis/tokens/tokens-to-assign/4/' + globals.idCompany)).json()
             globals.studentsToAssign = studentsToAssign.length
 
@@ -345,7 +345,7 @@ window.addEventListener('DOMContentLoaded',async()=>{
             companyCourses.forEach(course => {
                 createUserCourse.innerHTML += '<option value="'+ course.id +'">' + course.course_name + '</option>'
             })
-            
+
         }else{
             createCommissionData.style.display = 'none'
             createUserCategory.innerHTML += '<option value="1">Administrador general</option>'
@@ -435,7 +435,7 @@ window.addEventListener('DOMContentLoaded',async()=>{
         globals.selectedUsers = []
         unCheckElements(usersFiltered)
         hideDGAs()
-        
+
         loader.style.display = 'none'
 
         okEditPopup.style.display = 'block'
@@ -481,7 +481,7 @@ window.addEventListener('DOMContentLoaded',async()=>{
                         const tokensToAssign = await (await fetch(dominio + '/apis/tokens/tokens-to-assign/' + idUserCategory + '/' + globals.idCompany)).json()
 
                         const tokensToAssignQty = tokensToAssign.length
-                        
+
                         const usersToCreate = globals.usersToCreate.filter( u => parseInt(u.id_user_categories) == parseInt(idUserCategory)).length
 
                         if (globals.idCompany != 'allCompanies' && tokensToAssignQty <= usersToCreate) {
@@ -516,7 +516,7 @@ window.addEventListener('DOMContentLoaded',async()=>{
     })
 
     createUserCourse.addEventListener("change", async() => {
-        
+
         createUserCommission.innerHTML = '<option value="default" selected></option>'
 
         if (createUserCourse.value != 'default') {
@@ -530,10 +530,10 @@ window.addEventListener('DOMContentLoaded',async()=>{
             filteredCommissions.forEach(element => {
                 const startDate = dateToString(element.start_date)
                 const endDate = dateToString(element.end_date)
-                
+
                 createUserCommission.innerHTML += '<option value=' + element.id + '>' + element.commission + ' (' + startDate + ' - ' + endDate +')</option>'
             })
-            
+
         }
     })
 
@@ -546,7 +546,7 @@ window.addEventListener('DOMContentLoaded',async()=>{
         if (globals.usersToCreate.length > 0 ) {
 
             loader.style.display = 'block'
-            
+
             const data = {
                 'usersToCreate':globals.usersToCreate,
                 'companyId':globals.idCompany,
@@ -554,7 +554,7 @@ window.addEventListener('DOMContentLoaded',async()=>{
             }
 
             createPopup.style.display = 'none'
-    
+
             //create users
             await fetch(dominio + '/apis/users/create-users/',{
                 method:'POST',
@@ -565,7 +565,7 @@ window.addEventListener('DOMContentLoaded',async()=>{
             let users = await getUsers(companies)
             const usersFiltered = globals.idCompany == 'allCompanies' ? users : users.filter( u => u.id_companies == globals.idCompany)
             printTableUsers(usersFiltered)
-            
+
             //unselect elements
             globals.selectedUsers = usersFiltered
             unCheckElements(usersFiltered)
@@ -578,9 +578,9 @@ window.addEventListener('DOMContentLoaded',async()=>{
             //hide okPopup after one second
             setTimeout(function() {
                 okCreatePopup.style.display = 'none'
-            }, 1000)    
+            }, 1000)
         }
-    
+
     })
 
     uploadExcel.addEventListener("click", async() => {
@@ -598,9 +598,9 @@ window.addEventListener('DOMContentLoaded',async()=>{
     })
 
     uploadExcelPopupAccept.addEventListener("click", async() => {
-        
+
         const file = uploadExcelInput.files[0]
-        
+
         if (file) {
 
             const fileName = file.name;
@@ -617,7 +617,7 @@ window.addEventListener('DOMContentLoaded',async()=>{
                     method: 'POST',
                     body: formData
                   })
-    
+
                 let data = await response.json()
                 data.shift()
 
@@ -625,7 +625,7 @@ window.addEventListener('DOMContentLoaded',async()=>{
                 const teachersAllowed = await (await fetch(dominio + '/apis/tokens/tokens-to-assign/3/' + globals.idCompany)).json()
                 const studentsAllowed = await (await fetch(dominio + '/apis/tokens/tokens-to-assign/4/' + globals.idCompany)).json()
                 const adminsAllowed = await (await fetch(dominio + '/apis/tokens/tokens-to-assign/2/' + globals.idCompany)).json()
-                
+
                 let nullFields = 0
                 let students = 0
                 let teachers = 0
@@ -636,19 +636,19 @@ window.addEventListener('DOMContentLoaded',async()=>{
                 let invalidIdCategories = 0
 
                 data.forEach(element => {
-                
+
                     //null fields
                     if (element[0] == null || element[1] == null || element[2] == null || element[3] == null || element[4] == null) {
                         nullFields += 1
                     }
-    
+
                     //invalid mails
                     const email = element[3]
                     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
                     if (!regex.test(email)) {
                         invalidEmails +=1
                     }
-    
+
                     //existting user
                     const findUser = allUsers.filter(u => u.user_email == element[3])
                     if (findUser.length > 0) {
@@ -668,18 +668,18 @@ window.addEventListener('DOMContentLoaded',async()=>{
                     if (globals.idCompany != 'allCompanies' && (element[4] != 2 && element[4] != 3 && element[4] != 4)) {
                         invalidIdCategories +=1
                     }
-    
+
                     //tokens available
                     students = element[4] == 4 ? (students + 1) : students
                     teachers = element[4] == 3 ? (teachers + 1) : teachers
                     admins = element[4] == 2 ? (admins + 1) : admins
-    
+
                 })
 
                 //repeated emails
                 const emails = data.map(subArray => subArray[3])
                 const uniqueEmails = [...new Set(emails)]
-                
+
                 if (emails.length > uniqueEmails.length) {
                     repeatedEmails +=1
                 }
@@ -702,7 +702,7 @@ window.addEventListener('DOMContentLoaded',async()=>{
                             }else{
                                 if (invalidIdCategories > 0) {
                                     excelError.innerText = 'Se detectaron categorías de usuarios inválidas'
-                                    excelError.classList.remove('notVisible')                                    
+                                    excelError.classList.remove('notVisible')
                                 }else{
                                     if (globals.idCompany!='allCompanies' && (studentsAllowed.length < students || teachersAllowed.length < teachers || adminsAllowed.length < admins)) {
                                         excelError.innerText = 'Excede la cantidad de licencias por perfil'
@@ -731,8 +731,8 @@ window.addEventListener('DOMContentLoaded',async()=>{
                                         uploadExcelPopup.style.display = 'none'
                                         excelError.classList.add('notVisible')
                                     }
-                                }                                
-                            }                        
+                                }
+                            }
                         }
                     }
                 }

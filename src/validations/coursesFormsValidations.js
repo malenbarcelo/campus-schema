@@ -135,6 +135,7 @@ const coursesFormsValidations = {
                     }else{
                         const fileName = req.file.filename
                         const emails = await readXlsFile('public/files/assignStudents/' + fileName)
+
                         
                         const students = await db.Users.findAll({
                             where:{
@@ -144,6 +145,17 @@ const coursesFormsValidations = {
                             nest:true,
                             raw:true
                         })
+
+                        // const students = await db.Tokens.findAll({ // en realidad son not assigned tokens, le deje el mismo nombre para no tener qe camiar todo
+                        //                 where:{
+                        //                     id_user_categories:4,
+                        //                     id_companies: req.session.userLogged.id_companies,
+                        //                     id_users: null
+                        //                 },
+                        //                 nest:true,
+                        //                 raw:true
+                        // })
+
                         if(students.length < emails.length){
                             throw new Error('El archivo subido registra más de ' + students.length + ' alumnos')
                         }else{

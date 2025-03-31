@@ -8,6 +8,8 @@ const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fet
 const commissionData = require('./functions/commissionData');
 const filterCommissionFunctions = require('./functions/filterCommissionFunctions')
 const usersQueries = require('./dbQueries/usersQueries')
+const coursesQueries = require('./dbQueries/coursesQueries')
+const courseCommissionsQueries = require('./dbQueries/courseCommissionsQueries')
 
 const coursesController = {
     createCourse: async(req,res) => {
@@ -273,139 +275,49 @@ const coursesController = {
             //if user logged is an administrator, get company courses and commissions
             if (req.session.userLogged.id_user_categories == 2) {
 
-                const companyTeachers = await usersQueries.companyTeachers(req.session.userLogged.id_companies)
-                const idsTeachers = []
-
-                companyTeachers.forEach(teacher => {
-                    idsTeachers.push(teacher.id)
-                })
-
-                const teacherCommissions = await db.Course_commissions_teachers.findAll({
-                    where:{id_teachers:idsTeachers},
-                    raw:true,
-                    nest:true,
-                    include:[{association:'commission_data'}]
-                })
-
-                var teacherCourses = []
-
-                for (let i = 0; i < teacherCommissions.length; i++) {
-                    const course = await db.Courses.findOne({
-                        where:{id:teacherCommissions[i].commission_data.id_courses},
-                        raw:true
-                    })
-
-                    teacherCourses.push({'id_courses':teacherCommissions[i].commission_data.id_courses,'course_name':course.course_name})
-                    
-                }
-
-                //remove duplicates
-                teacherCourses = teacherCourses.filter(function({id_courses}) {
-                    return !this.has(id_courses) && this.add(id_courses)
-                    }, new Set)
-
-                //order courses by course_name
-                teacherCourses.sort((a,b)=> (a.course_name < b.course_name ? -1 : 1))
-
-                commissions = teacherCommissions
-                courses = teacherCourses
-                
-
-                /*const companyCourses = await db.Courses.findAll({
-                    attributes:[['id','id_courses'],'course_name'],
-                    where:{id_companies:req.session.userLogged.id_companies},
-                    order:[['course_name','ASC']],
-                    raw:true
-                })
-
-                const idsCompanyCourses = companyCourses.map(companyCourse => companyCourse.id_courses)
-
-                const companyCommissions = await db.Course_commissions.findAll({
-                    where:{id_courses:idsCompanyCourses},
-                    include:[{association:'course_commission_course'}],
-                    nest:true,
-                    raw:true,
-                })
-
-                commissions = companyCommissions
-                courses = companyCourses*/
+                courses = await coursesQueries.companyCourses(req.session.userLogged.id_companies)
+                const idCourses = courses.map( c => c.id)
+                commissions = await courseCommissionsQueries.companyCommissions(idCourses)
 
             }
 
             //if user logged is a teacher, get teacher courses and commissions
             if (req.session.userLogged.id_user_categories == 3) {
 
-                const teacherCommissions = await db.Course_commissions_teachers.findAll({
-                    where:{id_teachers:req.session.userLogged.id},
-                    raw:true,
-                    nest:true,
-                    include:[{association:'commission_data'}]
-                })                
+                courses = await coursesQueries.companyCourses(req.session.userLogged.id_companies)
+                let idCourses = courses.map( c => c.id)
+                commissions = await courseCommissionsQueries.companyCommissions(idCourses)
+                commissions = commissions.map(c => c.get({ plain: true }))
+                commissions = commissions.filter(c => c.teachers_data.length > 0)
+                
+                commissions = commissions.filter(item =>
+                    item.teachers_data.some(teacher => teacher.id_teachers == req.session.userLogged.id)
+                )
 
-                /*const teacherCommissions = await db.Course_commissions.findAll({
-                    where:{id_teachers:req.session.userLogged.id},
-                    raw:true,
-                    nest:true,
-                    include:[{association:'course_commission_course'}]
-                })*/
+                idCourses = commissions.map(c => c.id_courses)
+                idCourses = [...new Set(idCourses)]
 
-                var teacherCourses = []
-
-                for (let i = 0; i < teacherCommissions.length; i++) {
-                    const course = await db.Courses.findOne({
-                        where:{id:teacherCommissions[i].commission_data.id_courses},
-                        raw:true
-                    })
-
-                    teacherCourses.push({'id_courses':teacherCommissions[i].commission_data.id_courses,'course_name':course.course_name})
-                    
-                }
-
-                //remove duplicates
-                teacherCourses = teacherCourses.filter(function({id_courses}) {
-                    return !this.has(id_courses) && this.add(id_courses)
-                    }, new Set)
-
-                //order courses by course_name
-                teacherCourses.sort((a,b)=> (a.course_name < b.course_name ? -1 : 1))
-
-                commissions = teacherCommissions
-                courses = teacherCourses
+                courses = courses.filter(c => idCourses.includes(c.id))
+                
             }
 
             //if user logged is a student, get student courses and commissions
             if (req.session.userLogged.id_user_categories == 4) {
-                const studentCommissions = await db.Course_commissions_students.findAll({
-                    where:{id_students:req.session.userLogged.id},
-                    raw:true,
-                    nest:true,
-                    include:[{all:true}]
-                })
+                courses = await coursesQueries.companyCourses(req.session.userLogged.id_companies)
+                let idCourses = courses.map( c => c.id)
+                commissions = await courseCommissionsQueries.companyCommissions(idCourses)
+                commissions = commissions.map(c => c.get({ plain: true }))
+                commissions = commissions.filter(c => c.course_commission_student.length > 0)
+                
+                commissions = commissions.filter(item =>
+                    item.course_commission_student.some(student => student.id_students == req.session.userLogged.id)
+                )
 
-                //add data to commission to get same array than companies and teachers
-                studentCommissions.forEach(studentCommission => {
-                    studentCommission.course_commission_course = {'id':studentCommission.commission_data.id_courses}
-                    studentCommission.id = studentCommission.id_course_commissions
-                    studentCommission.commission = studentCommission.commission_data.commission
-                    studentCommission.start_date = studentCommission.commission_data.start_date
-                    studentCommission.end_date = studentCommission.commission_data.end_date
-                });
+                idCourses = commissions.map(c => c.id_courses)
+                idCourses = [...new Set(idCourses)]
 
-                let idsStudentCourses = studentCommissions.map(studentCommission => studentCommission.commission_data.id_courses)
-
-                //remove duplicates
-                idsStudentCourses = [...new Set(idsStudentCourses)];
-
-                //get courses
-                const studentCourses = await db.Courses.findAll({
-                    where:{id:idsStudentCourses},
-                    attributes:[['id','id_courses'],'course_name'],
-                    raw:true
-                })
-
-                commissions = studentCommissions
-                courses = studentCourses
-
+                courses = courses.filter(c => idCourses.includes(c.id))
+                
             }
 
             return res.render('courses/myCourses',{title:'Mis Cursos',commissions,courses,date})
@@ -645,15 +557,27 @@ const coursesController = {
       },
       assignStudents: async(req,res) => {
         try{
-            const students = await db.Users.findAll({
+            // const students = await db.Users.findAll({
+            //     where:{
+            //         id_user_categories:4,
+            //         id_companies:req.session.userLogged.id_companies
+            //     },
+            //     nest:true,
+            //     raw:true
+            // })
+
+
+            const companies = await db.Companies.findAll({raw:true,nest:true})
+
+            const students = await db.Tokens.findAll({ // en realidad son not assigned tokens, le deje el mismo nombre para no tener qe camiar todo
                 where:{
                     id_user_categories:4,
-                    id_companies:req.session.userLogged.id_companies
+                    id_companies: req.session.userLogged.id_companies,
+                    id_users: null
                 },
                 nest:true,
                 raw:true
             })
-            const companies = await db.Companies.findAll({raw:true,nest:true})
             
             const courses = await db.Courses.findAll({
                 where: {id_companies:req.session.userLogged.id_companies},
@@ -693,10 +617,20 @@ const coursesController = {
                 raw:true,
                 nest:true
             })
-            const students = await db.Users.findAll({
+            // const students = await db.Users.findAll({
+            //     where:{
+            //         id_user_categories:4,
+            //         id_companies:idCompany
+            //     },
+            //     nest:true,
+            //     raw:true
+            // })
+
+            const students = await db.Tokens.findAll({ // en realidad son not assigned tokens, le deje el mismo nombre para no tener qe camiar todo
                 where:{
                     id_user_categories:4,
-                    id_companies:idCompany
+                    id_companies: req.session.userLogged.id_companies,
+                    id_users: null
                 },
                 nest:true,
                 raw:true

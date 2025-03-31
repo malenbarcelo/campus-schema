@@ -11,6 +11,7 @@ window.addEventListener('load',async()=>{
     const companies = await (await fetch(dominio + '/apis/companies')).json()
     const courses = await (await fetch(dominio + '/apis/courses')).json()
     const allCommissions = await (await fetch(dominio + '/apis/commissions')).json()
+    const notAssignedTokens = await (await fetch(dominio + '/apis/not-assigned-tokens')).json()
     var idCompany = ''
     
     if(selectCompany != null){
@@ -34,13 +35,18 @@ window.addEventListener('load',async()=>{
 
                 //get cmpany students
                 const companyStudents = await (await fetch(dominio + '/apis/company-students/' + idCompany)).json()
+                const availableTokens = notAssignedTokens.filter(nat => nat.id_companies == idCompany && nat.id_user_categories == 4)
 
                 //add administrator note
-                if(companyStudents.length == 0){
-                    noteForAdministrator.innerHTML = '<p class="p1"><i class="fa-solid fa-triangle-exclamation"></i> La institución no posee alumnos registrados para asociar a la comisión.</p>'
-                }else{
-                    noteForAdministrator.innerHTML = '<p class="p1"><i class="fa-solid fa-triangle-exclamation"></i> Puede asignar un máximo de '+ companyStudents.length +' alumnos a cada comisión, en caso de necesitar más cupos, solicite nuevos tokens de alumnos para la institución.</p>'
-                }
+                // if(companyStudents.length == 0){
+                //     noteForAdministrator.innerHTML = '<p class="p1"><i class="fa-solid fa-triangle-exclamation"></i> La institución no posee licencias de alumnos disponibles.</p>'
+                // }else{
+
+                //     noteForAdministrator.innerHTML = '<p class="p1"><i class="fa-solid fa-triangle-exclamation"></i> Tiene un total de ' + availableTokens.length + ' licencias de alumno disponibles para asignar.</p>'
+
+
+                //     // noteForAdministrator.innerHTML = '<p class="p1"><i class="fa-solid fa-triangle-exclamation"></i> Puede asignar un máximo de '+ companyStudents.length +' alumnos a cada comisión, en caso de necesitar más cupos, solicite nuevos tokens de alumnos para la institución.</p>'
+                // }
 
                 //get company courses
                 const companyCourses = await (await fetch(dominio + '/apis/company-courses/' + idCompany)).json()

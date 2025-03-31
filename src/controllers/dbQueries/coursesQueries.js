@@ -9,6 +9,22 @@ const coursesQueries = {
         })
         return courses
     },
+    companyCourses: async(idCompanies) => {
+
+        const courses = await db.Courses.findAll({
+            order:[['course_name','ASC']],
+            where:{
+                id_companies: idCompanies
+            },
+            include:[{
+                association:'commission_data',
+                include:[{association:'teachers_data'}]
+            }],
+            //raw:true,
+            nest:true
+        })
+        return courses
+    },
 }
 
 module.exports = coursesQueries

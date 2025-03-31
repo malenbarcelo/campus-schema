@@ -40,6 +40,11 @@ module.exports = (sequelize, DataTypes) => {
           as:'course_commission_course',
           foreignKey: 'id_courses'
       }),
+      Course_commission.hasMany(models.Course_commissions_teachers,{
+         as:'teachers_data',
+         foreignKey: 'id_course_commissions',
+         
+     })
       Course_commission.hasMany(models.Course_commissions_students,{
          as:'course_commission_student',
          foreignKey: 'id_course_commissions'

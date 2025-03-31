@@ -9,6 +9,21 @@ const courseCommissionsQueries = {
         })
         return commissions
     },
+    companyCommissions: async(idCourses) => {
+        const commissions = await db.Course_commissions.findAll({
+            where:{
+                id_courses:idCourses
+            },
+            include:[
+                {association:'teachers_data'},
+                {association:'course_commission_student'}
+            ],
+            order:[['commission','ASC']],
+            //raw:true,
+            nest:true
+        })
+        return commissions
+    },
     findStudentByCommission: async(idStudent,idCommission) => {
         const findStudent = await db.Course_commissions_students.findAll({
             where:{

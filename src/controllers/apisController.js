@@ -120,7 +120,6 @@ const apisController = {
         try{
             const file = req.file.filename
             const emails = await readXlsFile('public/files/assignStudents/' + file)
-            console.log(file)
             return res.status(200).json(emails)
         }catch(error){
             console.log(error)
