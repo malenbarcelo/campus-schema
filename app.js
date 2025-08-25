@@ -17,7 +17,6 @@ const apisRoutes = require('./src/routes/apisRoutes.js')
 const simulatorsRoutes = require('./src/routes/simulatorsRoutes.js')
 const companiesRoutes = require('./src/routes/companiesRoutes.js')
 
-
 //use public as statis
 app.use(express.static(publicPath))
 
@@ -61,7 +60,7 @@ app.use('/simulators',simulatorsRoutes)
 
 app.use('/companies',companiesRoutes)
 
-console.log(bcrypt.hashSync('user1',10))
+//console.log(bcrypt.hashSync('user1',10))
 
 
 
